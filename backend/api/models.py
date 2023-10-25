@@ -7,6 +7,7 @@ class User(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email_address = models.EmailField(unique=True)
+    overall_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 
 
 class Rate(models.Model):
