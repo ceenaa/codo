@@ -39,16 +39,8 @@ definitions:
         type: string
       first_name:
         type: string
-      given_ratings:
-        items:
-          $ref: '#/definitions/controllers.RatingOutput'
-        type: array
       last_name:
         type: string
-      recieved_ratings:
-        items:
-          $ref: '#/definitions/controllers.RatingOutput'
-        type: array
       role:
         type: string
       total_raters:
@@ -99,6 +91,43 @@ paths:
       summary: Create a new rating
       tags:
       - Rating
+  /rating/given/{username}:
+    get:
+      consumes:
+      - application/json
+      description: Get given ratings
+      parameters:
+      - description: Username
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Per page
+        in: query
+        name: per_page
+        type: integer
+      - description: Order by
+        in: query
+        name: order_by
+        type: string
+      - description: Order
+        in: query
+        name: order
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Ratings
+          schema:
+            $ref: '#/definitions/controllers.RatingOutput'
+      summary: Get given ratings
+      tags:
+      - Rating
   /rating/list:
     get:
       consumes:
@@ -139,6 +168,43 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: Get ratings
+      tags:
+      - Rating
+  /rating/recieved/{username}:
+    get:
+      consumes:
+      - application/json
+      description: Get recieved ratings
+      parameters:
+      - description: Username
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Per page
+        in: query
+        name: per_page
+        type: integer
+      - description: Order by
+        in: query
+        name: order_by
+        type: string
+      - description: Order
+        in: query
+        name: order
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Ratings
+          schema:
+            $ref: '#/definitions/controllers.RatingOutput'
+      summary: Get recieved ratings
       tags:
       - Rating
   /users/{username}:

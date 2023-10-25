@@ -11,5 +11,7 @@ func InitializeRatingRoutes(router *gin.RouterGroup) {
 	{
 		ratingGroup.POST("/create", middleware.RequireAuth, controllers.CreateRating)
 		ratingGroup.GET("/list", controllers.RatingList)
+		ratingGroup.GET("/recieved/:username", controllers.RecievedRattingList)
+		ratingGroup.GET("/given/:username", controllers.GivenRattingList)
 	}
 }

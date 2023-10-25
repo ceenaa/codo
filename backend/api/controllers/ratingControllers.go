@@ -107,3 +107,79 @@ func RatingList(c *gin.Context) {
 	querySet.Find(&ratings)
 	c.JSON(200, gin.H{"ratings": ratings})
 }
+
+// @Summary Get recieved ratings
+// @Description Get recieved ratings
+// @Tags Rating
+// @Accept json
+// @Produce json
+// @Param username path string true "Username"
+// @Param page query int false "Page"
+// @Param per_page query int false "Per page"
+// @Param order_by query string false "Order by"
+// @Param order query string false "Order"
+// @Success 200 {object} RatingOutput "Ratings"
+// @Router /rating/recieved/{username} [get]
+func GivenRattingList(c *gin.Context) {
+	var ratings []RatingOutput
+	page := c.DefaultQuery("page", "1")
+	perPage := c.DefaultQuery("per_page", "10")
+	orderBy := c.DefaultQuery("order_by", "created_at")
+	ratedUsername := c.Param("username")
+	order := c.DefaultQuery("order", "desc")
+	pageNum, err := strconv.Atoi(page)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Page must be a number"})
+		return
+	}
+	perPageNum, err := strconv.Atoi(perPage)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Per page must be a number"})
+		return
+	}
+	startIdx := (pageNum - 1) * perPageNum
+	querySet := initializers.DB.Model(&models.Rating{}).Limit(perPageNum).Offset(startIdx).Order(orderBy + " " + order)
+	if ratedUsername != "" {
+		querySet = querySet.Where("rated_username = ?", ratedUsername)
+	}
+	querySet.Find(&ratings)
+	c.JSON(200, gin.H{"ratings": ratings})
+}
+
+// @Summary Get given ratings
+// @Description Get given ratings
+// @Tags Rating
+// @Accept json
+// @Produce json
+// @Param username path string true "Username"
+// @Param page query int false "Page"
+// @Param per_page query int false "Per page"
+// @Param order_by query string false "Order by"
+// @Param order query string false "Order"
+// @Success 200 {object} RatingOutput "Ratings"
+// @Router /rating/given/{username} [get]
+func RecievedRattingList(c *gin.Context) {
+	var ratings []RatingOutput
+	page := c.DefaultQuery("page", "1")
+	perPage := c.DefaultQuery("per_page", "10")
+	orderBy := c.DefaultQuery("order_by", "created_at")
+	raterUsername := c.Param("username")
+	order := c.DefaultQuery("order", "desc")
+	pageNum, err := strconv.Atoi(page)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Page must be a number"})
+		return
+	}
+	perPageNum, err := strconv.Atoi(perPage)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Per page must be a number"})
+		return
+	}
+	startIdx := (pageNum - 1) * perPageNum
+	querySet := initializers.DB.Model(&models.Rating{}).Limit(perPageNum).Offset(startIdx).Order(orderBy + " " + order)
+	if raterUsername != "" {
+		querySet = querySet.Where("rater_username = ?", raterUsername)
+	}
+	querySet.Find(&ratings)
+	c.JSON(200, gin.H{"ratings": ratings})
+}
