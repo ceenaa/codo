@@ -1,0 +1,100 @@
+basePath: /api/
+definitions:
+  controllers.CreateUserRequest:
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+      username:
+        type: string
+    type: object
+  controllers.UserLoginRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a sample server Petstore server.
+  title: Swagger Example API
+  version: "1"
+paths:
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: Log in a user with username and password.
+      parameters:
+      - description: User credentials
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.UserLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User logged in
+          schema:
+            type: string
+      summary: User login
+      tags:
+      - Authentication
+  /users/logout:
+    get:
+      description: Log out the current user.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User logged out
+          schema:
+            type: string
+      summary: User logout
+      tags:
+      - Authentication
+  /users/signup:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user account with a username and password.
+      parameters:
+      - description: User credentials
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User created
+          schema:
+            type: string
+      summary: Create a new user account
+      tags:
+      - Authentication
+  /users/validate:
+    get:
+      description: Check if the user is logged in and the session is valid.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User logged in" {string} string "User role
+          schema:
+            type: string
+      summary: Validate user session
+      tags:
+      - Authentication
+swagger: "2.0"
