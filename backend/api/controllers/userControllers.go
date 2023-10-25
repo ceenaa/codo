@@ -31,8 +31,8 @@ type UserOutput struct {
 	LastName        string         `json:"last_name"`
 	AverageRate     float64        `json:"average_rate"`
 	TotalRaters     uint           `json:"total_raters"`
-	RecievedRatings []RatingOutput `gorm:"foreignKey:RaterID" json:"recieved_ratings"`
-	GivenRatings    []RatingOutput `gorm:"foreignKey:RaterID" json:"given_ratings"`
+	RecievedRatings []RatingOutput `gorm:"foreignKey:RaterUsername" json:"recieved_ratings"`
+	GivenRatings    []RatingOutput `gorm:"foreignKey:RaterUsername" json:"given_ratings"`
 	Role            string         `json:"role"`
 }
 
@@ -197,8 +197,8 @@ func UserDetails(c *gin.Context) {
 	}
 	var recievedRatings []RatingOutput
 	var givenRatings []RatingOutput
-	initializers.DB.Model(&models.Rating{}).Where("rated_id = ?", user.ID).Find(&recievedRatings)
-	initializers.DB.Model(&models.Rating{}).Where("rater_id = ?", user.ID).Find(&givenRatings)
+	initializers.DB.Model(&models.Rating{}).Where("rated_username = ?", user.Username).Find(&recievedRatings)
+	initializers.DB.Model(&models.Rating{}).Where("rater_username = ?", user.Username).Find(&givenRatings)
 	user.RecievedRatings = recievedRatings
 	user.GivenRatings = givenRatings
 

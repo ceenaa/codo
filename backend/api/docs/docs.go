@@ -98,15 +98,15 @@ const docTemplate = `{
                         "in": "query"
                     },
                     {
-                        "type": "integer",
-                        "description": "Rater ID",
-                        "name": "rater_id",
+                        "type": "string",
+                        "description": "Rater username",
+                        "name": "rater_username",
                         "in": "query"
                     },
                     {
-                        "type": "integer",
-                        "description": "Rated ID",
-                        "name": "rated_id",
+                        "type": "string",
+                        "description": "Rated username",
+                        "name": "rated_username",
                         "in": "query"
                     }
                 ],
@@ -334,11 +334,11 @@ const docTemplate = `{
                 "rate": {
                     "type": "number"
                 },
-                "rated_id": {
-                    "type": "integer"
+                "rated_username": {
+                    "type": "string"
                 },
-                "rater_id": {
-                    "type": "integer"
+                "rater_username": {
+                    "type": "string"
                 }
             }
         },

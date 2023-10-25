@@ -19,10 +19,10 @@ definitions:
         type: string
       rate:
         type: number
-      rated_id:
-        type: integer
-      rater_id:
-        type: integer
+      rated_username:
+        type: string
+      rater_username:
+        type: string
     type: object
   controllers.UserLoginRequest:
     properties:
@@ -121,14 +121,14 @@ paths:
         in: query
         name: order
         type: string
-      - description: Rater ID
+      - description: Rater username
         in: query
-        name: rater_id
-        type: integer
-      - description: Rated ID
+        name: rater_username
+        type: string
+      - description: Rated username
         in: query
-        name: rated_id
-        type: integer
+        name: rated_username
+        type: string
       produces:
       - application/json
       responses:

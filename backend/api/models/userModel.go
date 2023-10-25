@@ -11,8 +11,8 @@ type User struct {
 	LastName        string `gorm:"NOT NULL"`
 	AverageRate     float64
 	TotalRaters     uint
-	RecievedRatings []Rating `gorm:"foreignKey:RatedID"`
-	GivenRatings    []Rating `gorm:"foreignKey:RaterID"`
+	RecievedRatings []Rating `gorm:"foreignKey:RatedUsername"`
+	GivenRatings    []Rating `gorm:"foreignKey:RaterUsername"`
 	Password        string   `gorm:"NOT NULL" json:"-"`
 	Role            string   `gorm:"NOT NULL" Default:"user"`
 }
