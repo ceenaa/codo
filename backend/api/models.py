@@ -1,9 +1,12 @@
+import time
+
 from django.db import models
 
 
 # Create your models here.
 
 class User(models.Model):
+    username = models.CharField(max_length=50, unique=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email_address = models.EmailField(unique=True)
@@ -21,7 +24,8 @@ class Rate(models.Model):
     rate = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
-        return self.source.first_name + ' ' + self.source.last_name + ' -> ' + self.destination.first_name + ' ' + self.destination.last_name + ' : ' + str(self.rate)
+        return self.source.first_name + ' ' + self.source.last_name + ' -> ' + self.destination.first_name + ' ' + self.destination.last_name + ' : ' + str(
+            self.rate)
 
 
 class base(models.Model):
