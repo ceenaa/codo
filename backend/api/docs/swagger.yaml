@@ -13,12 +13,60 @@ definitions:
       username:
         type: string
     type: object
+  controllers.RatingOutput:
+    properties:
+      created_at:
+        type: string
+      rate:
+        type: number
+      rated_id:
+        type: integer
+      rater_id:
+        type: integer
+    type: object
   controllers.UserLoginRequest:
     properties:
       password:
         type: string
       username:
         type: string
+    type: object
+  controllers.UserOutput:
+    properties:
+      average_rate:
+        type: number
+      created_at:
+        type: string
+      first_name:
+        type: string
+      given_ratings:
+        items:
+          $ref: '#/definitions/controllers.RatingOutput'
+        type: array
+      last_name:
+        type: string
+      recieved_ratings:
+        items:
+          $ref: '#/definitions/controllers.RatingOutput'
+        type: array
+      role:
+        type: string
+      total_raters:
+        type: integer
+      user_id:
+        type: integer
+      username:
+        type: string
+    type: object
+  controllers.createRatingInput:
+    properties:
+      rate:
+        type: number
+      rated_username:
+        type: string
+    required:
+    - rate
+    - rated_username
     type: object
 host: localhost:8080
 info:
@@ -27,6 +75,53 @@ info:
   title: Swagger Example API
   version: "1"
 paths:
+  /rating/create:
+    post:
+      consumes:
+      - application/json
+      description: Create a new rating
+      parameters:
+      - description: Rating
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.createRatingInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Rating created
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Create a new rating
+      tags:
+      - Rating
+  /users/{username}:
+    get:
+      description: Get the details of a user.
+      parameters:
+      - description: Username
+        in: path
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User details
+          schema:
+            $ref: '#/definitions/controllers.UserOutput'
+        "404":
+          description: User not found
+          schema:
+            type: string
+      summary: Get user details
+      tags:
+      - Users
   /users/login:
     post:
       consumes:

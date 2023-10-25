@@ -22,6 +22,18 @@ type UserLoginRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
+type UserOutput struct {
+	CreatedAt       time.Time      `json:"created_at"`
+	ID              uint           `json:"user_id"`
+	Username        string         `json:"username"`
+	FirstName       string         `json:"first_name"`
+	LastName        string         `json:"last_name"`
+	AverageRate     float64        `json:"average_rate"`
+	TotalRaters     uint           `json:"total_raters"`
+	RecievedRatings []RatingOutput `gorm:"foreignKey:RaterID" json:"recieved_ratings"`
+	GivenRatings    []RatingOutput `gorm:"foreignKey:RaterID" json:"given_ratings"`
+	Role            string         `json:"role"`
+}
 
 // @Summary Create a new user account
 // @Description Register a new user account with a username and password.
@@ -147,7 +159,40 @@ func Validate(c *gin.Context) {
 	user = c.MustGet("user").(models.User)
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Im logged in",
-		"role":    user.Role,
+		"message":    "Im logged in",
+		"role":       user.Role,
+		"username":   user.Username,
+		"first_name": user.FirstName,
+		"last_name":  user.LastName,
 	})
+}
+
+// @Summary Get user details
+// @Description Get the details of a user.
+// @Tags Users
+// @Produce json
+// @Param username path string true "Username"
+// @Success 200 {string} string "User details"
+// @Router /users/{username} [get]
+// @Response 404 {string} string "User not found"
+// @Response 200 {object} UserOutput "User details"
+func UserDetails(c *gin.Context) {
+	var user UserOutput
+	username := c.Param("username")
+	initializers.DB.Model(&models.User{}).Where("username = ?", username).First(&user)
+	if user.ID == 0 {
+		c.JSON(404, gin.H{"error": "User not found"})
+		return
+	}
+	var recievedRatings []RatingOutput
+	var givenRatings []RatingOutput
+	initializers.DB.Model(&models.Rating{}).Where("rated_id = ?", user.ID).Find(&recievedRatings)
+	initializers.DB.Model(&models.Rating{}).Where("rater_id = ?", user.ID).Find(&givenRatings)
+	user.RecievedRatings = recievedRatings
+	user.GivenRatings = givenRatings
+
+	c.JSON(http.StatusOK, gin.H{
+		"user": user,
+	})
+
 }

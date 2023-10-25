@@ -2,27 +2,33 @@ package controllers
 
 import (
 	"backend/initializers"
+	"backend/logic"
 	"backend/models"
 	"github.com/gin-gonic/gin"
-	"time"
 )
 
 type createRatingInput struct {
-	Rate    float64 `json:"rate" binding:"required"`
-	RatedID uint    `json:"rated_id" binding:"required"`
+	Rate          float64 `json:"rate" binding:"required"`
+	RatedUsername string  `json:"rated_username" binding:"required"`
 }
 
-// GetRating godoc
-// @Summary Get rating
-// @Description Get rating
+type RatingOutput struct {
+	CreatedAt string  `json:"created_at"`
+	RaterID   uint    `json:"rater_id"`
+	RatedID   uint    `json:"rated_id"`
+	Rate      float64 `json:"rate"`
+}
+
+// @Summary Create a new rating
+// @Description Create a new rating
 // @Tags Rating
 // @Accept json
 // @Produce json
 // @Param body body createRatingInput true "Rating"
+// @Security ApiKeyAuth
 // @Success 200 {string} string "Rating created"
-// @Router /rating [post]
-
-func GetRating(c *gin.Context) {
+// @Router /rating/create [post]
+func CreateRating(c *gin.Context) {
 	var user models.User
 	user = c.MustGet("user").(models.User)
 	var body createRatingInput
@@ -30,7 +36,7 @@ func GetRating(c *gin.Context) {
 		c.JSON(400, gin.H{"error": "Fields to read body"})
 		return
 	}
-	if user.ID == body.RatedID {
+	if user.Username == body.RatedUsername {
 		c.JSON(400, gin.H{"error": "You can't rate yourself"})
 		return
 	}
@@ -39,20 +45,20 @@ func GetRating(c *gin.Context) {
 		return
 	}
 	var ratedUser models.User
-	initializers.DB.First(&ratedUser, "id = ?", body.RatedID)
+	initializers.DB.First(&ratedUser, "username = ?", body.RatedUsername)
 	if ratedUser.ID == 0 {
 		c.JSON(400, gin.H{"error": "User not found"})
 		return
 	}
 	var rating models.Rating
-	rating.RatedID = body.RatedID
+	rating.RatedID = ratedUser.ID
 	rating.RaterID = user.ID
 	rating.Rate = body.Rate
-	rating.DateTime = time.Now().Format("2006-01-02 15:04:05")
 	result := initializers.DB.Create(&rating)
 	if result.Error != nil {
 		c.JSON(500, gin.H{"error": "Failed to create rating"})
 		return
 	}
+	logic.UpdateUserRatings(ratedUser, body.Rate)
 	c.JSON(200, gin.H{"message": "Rating created"})
 }

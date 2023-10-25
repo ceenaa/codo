@@ -1,4 +1,4 @@
-package routers
+package routes
 
 import (
 	"backend/controllers"
@@ -13,5 +13,6 @@ func InitializeUserRoutes(router *gin.RouterGroup) {
 		userGroup.POST("/login", controllers.Login)
 		userGroup.GET("/logout", middleware.RequireAuth, controllers.Logout)
 		userGroup.GET("/validate", middleware.RequireAuth, controllers.Validate)
+		userGroup.GET("/:username", controllers.UserDetails)
 	}
 }
