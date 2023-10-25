@@ -1,6 +1,8 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 type User struct {
 	gorm.Model
@@ -11,6 +13,6 @@ type User struct {
 	TotalRaters     uint
 	RecievedRatings []Rating `gorm:"foreignKey:RatedID"`
 	GivenRatings    []Rating `gorm:"foreignKey:RaterID"`
-	Password        string   `gorm:"NOT NULL"`
+	Password        string   `gorm:"NOT NULL" json:"-"`
 	Role            string   `gorm:"NOT NULL" Default:"user"`
 }

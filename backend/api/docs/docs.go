@@ -15,6 +15,45 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/rating/create": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Create a new rating",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Rating"
+                ],
+                "summary": "Create a new rating",
+                "parameters": [
+                    {
+                        "description": "Rating",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.createRatingInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Rating created",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/users/login": {
             "post": {
                 "description": "Log in a user with username and password.",
@@ -122,6 +161,41 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/users/{username}": {
+            "get": {
+                "description": "Get the details of a user.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user details",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Username",
+                        "name": "username",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User details",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.UserOutput"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -145,6 +219,23 @@ const docTemplate = `{
                 }
             }
         },
+        "controllers.RatingOutput": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "rate": {
+                    "type": "number"
+                },
+                "rated_id": {
+                    "type": "integer"
+                },
+                "rater_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "controllers.UserLoginRequest": {
             "type": "object",
             "properties": {
@@ -152,6 +243,62 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.UserOutput": {
+            "type": "object",
+            "properties": {
+                "average_rate": {
+                    "type": "number"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "given_ratings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/controllers.RatingOutput"
+                    }
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "recieved_ratings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/controllers.RatingOutput"
+                    }
+                },
+                "role": {
+                    "type": "string"
+                },
+                "total_raters": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.createRatingInput": {
+            "type": "object",
+            "required": [
+                "rate",
+                "rated_username"
+            ],
+            "properties": {
+                "rate": {
+                    "type": "number"
+                },
+                "rated_username": {
                     "type": "string"
                 }
             }

@@ -3,7 +3,7 @@ package main
 import (
 	"backend/initializers"
 	middleware "backend/middlewares"
-	"backend/routers"
+	"backend/routes"
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,8 +23,9 @@ func main() {
 	r := gin.Default()
 	r.Use(middleware.CORSMiddleware())
 	apiGroup := r.Group("/api")
-	routers.InitializeUserRoutes(apiGroup)
-	routers.InitializeDocsRoutes(apiGroup)
+	routes.InitializeUserRoutes(apiGroup)
+	routes.InitializeDocsRoutes(apiGroup)
+	routes.InitializeRatingRoutes(apiGroup)
 
 	// swagger
 
