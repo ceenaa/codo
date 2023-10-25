@@ -14,5 +14,7 @@ func InitializeUserRoutes(router *gin.RouterGroup) {
 		userGroup.GET("/logout", middleware.RequireAuth, controllers.Logout)
 		userGroup.GET("/validate", middleware.RequireAuth, controllers.Validate)
 		userGroup.GET("/:username", controllers.UserDetails)
+		userGroup.GET("/list", controllers.UserList)
+
 	}
 }

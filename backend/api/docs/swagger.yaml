@@ -99,6 +99,48 @@ paths:
       summary: Create a new rating
       tags:
       - Rating
+  /rating/list:
+    get:
+      consumes:
+      - application/json
+      description: Get ratings
+      parameters:
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Per page
+        in: query
+        name: per_page
+        type: integer
+      - description: Order by
+        in: query
+        name: order_by
+        type: string
+      - description: Order
+        in: query
+        name: order
+        type: string
+      - description: Rater ID
+        in: query
+        name: rater_id
+        type: integer
+      - description: Rated ID
+        in: query
+        name: rated_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Ratings
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Get ratings
+      tags:
+      - Rating
   /users/{username}:
     get:
       description: Get the details of a user.
@@ -120,6 +162,32 @@ paths:
           schema:
             type: string
       summary: Get user details
+      tags:
+      - Users
+  /users/list:
+    get:
+      description: Get a list of users.
+      parameters:
+      - description: Text
+        in: query
+        name: text
+        type: string
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Per page
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Users
+          schema:
+            type: string
+      summary: Get user list
       tags:
       - Users
   /users/login:

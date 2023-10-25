@@ -8,6 +8,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -33,6 +34,15 @@ type UserOutput struct {
 	RecievedRatings []RatingOutput `gorm:"foreignKey:RaterID" json:"recieved_ratings"`
 	GivenRatings    []RatingOutput `gorm:"foreignKey:RaterID" json:"given_ratings"`
 	Role            string         `json:"role"`
+}
+
+type UserMinimalOutput struct {
+	ID          uint    `json:"user_id"`
+	Username    string  `json:"username"`
+	FirstName   string  `json:"first_name"`
+	LastName    string  `json:"last_name"`
+	Role        string  `json:"role"`
+	AverageRate float64 `json:"average_rate"`
 }
 
 // @Summary Create a new user account
@@ -159,11 +169,12 @@ func Validate(c *gin.Context) {
 	user = c.MustGet("user").(models.User)
 
 	c.JSON(http.StatusOK, gin.H{
-		"message":    "Im logged in",
-		"role":       user.Role,
-		"username":   user.Username,
-		"first_name": user.FirstName,
-		"last_name":  user.LastName,
+		"message":     "Im logged in",
+		"role":        user.Role,
+		"username":    user.Username,
+		"first_name":  user.FirstName,
+		"last_name":   user.LastName,
+		"AverageRate": user.AverageRate,
 	})
 }
 
@@ -195,4 +206,37 @@ func UserDetails(c *gin.Context) {
 		"user": user,
 	})
 
+}
+
+// @Summary Get user list
+// @Description Get a list of users.
+// @Tags Users
+// @Produce json
+// @Param text query string false "Text"
+// @Param page query int false "Page"
+// @Param per_page query int false "Per page"
+// @Success 200 {string} string "Users"
+// @Router /users/list [get]
+func UserList(c *gin.Context) {
+	var users []UserMinimalOutput
+	text := c.Query("text")
+	page := c.DefaultQuery("page", "1")
+	perPage := c.DefaultQuery("per_page", "10")
+	pageNum, err := strconv.Atoi(page)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Page must be a number"})
+		return
+	}
+	perPageNum, err := strconv.Atoi(perPage)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Per page must be a number"})
+		return
+	}
+	startIdx := (pageNum - 1) * perPageNum
+	// search for users with text in username or first name or last name
+	initializers.DB.Model(&models.User{}).Where("username LIKE ? OR first_name LIKE ? OR last_name LIKE ?", "%"+text+"%", "%"+text+"%", "%"+text+"%").Limit(perPageNum).Offset(startIdx).Find(&users)
+
+	c.JSON(http.StatusOK, gin.H{
+		"users": users,
+	})
 }
