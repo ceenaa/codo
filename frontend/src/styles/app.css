@@ -1,0 +1,10 @@
+/* tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* global css */
+body {
+	min-height: 100vh;
+	@apply bg-slate-950 text-slate-50;
+}
