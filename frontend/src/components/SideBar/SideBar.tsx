@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 // icons
 import { AiOutlinePlus, AiOutlineStar } from 'react-icons/ai';
+import { BiHistory } from 'react-icons/bi';
 
 // sidebar
 const SideBar: React.FC<{
@@ -48,6 +49,21 @@ const SideBar: React.FC<{
 						>
 							<AiOutlinePlus className="text-rose-500" />
 							New Rate
+						</NavLink>
+					</li>
+					<li className="text-center" onClick={() => setIsMenuShown(false)}>
+						<NavLink
+							to="history"
+							className={({ isActive }) =>
+								`flex items-center justify-center gap-x-2 rounded py-1 tracking-tighter hover:bg-rose-500/50 ${
+									isActive
+										? 'bg-rose-700/50 font-semibold hover:bg-rose-700/50'
+										: 'hover:bg-rose-500/50'
+								} `
+							}
+						>
+							<BiHistory className="text-rose-500" />
+							History
 						</NavLink>
 					</li>
 				</ul>

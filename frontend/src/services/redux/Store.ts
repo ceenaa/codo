@@ -5,12 +5,14 @@ import { useDispatch } from 'react-redux';
 // reducers
 import User from './slices/User';
 import ListDetails from './slices/ListDetails';
+import HistoryPagination from './slices/HistoryPagination';
 
 // store
 export const store = configureStore({
 	reducer: {
 		user: User,
-		listDetails: ListDetails
+		listDetails: ListDetails,
+		history: HistoryPagination
 	}
 });
 

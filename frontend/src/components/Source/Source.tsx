@@ -1,11 +1,19 @@
 // react
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // icons
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { AiOutlineStar, AiFillStar, AiTwotoneStar } from 'react-icons/ai';
-import { useNavigate, useParams } from 'react-router-dom';
+
+// react query
 import useSingleUser from '../../hooks/useSingleUser';
+
+// axios
+import { postRating } from '../../services/axios/requests/rating';
+
+// react toastify
+import { ToastContainer, toast } from 'react-toastify';
 
 // rate user
 const Source: React.FC = () => {
@@ -20,6 +28,19 @@ const Source: React.FC = () => {
 
 	// GET single user from react query
 	const { data } = useSingleUser(String(user));
+
+	// create new rating
+	const submitRatingHandler = () => {
+		postRating({ rate, rated_username: user! })
+			.then(() => {
+				toast.success('Rating Created ✅', {
+					onClose: () => navigate('/rate')
+				});
+			})
+			.catch(() => {
+				toast.error('Something went wrong ❌');
+			});
+	};
 
 	// tsx
 	return (
@@ -58,11 +79,26 @@ const Source: React.FC = () => {
 				</div>
 			</main>
 			<button
-				className="mx-auto mt-10 flex h-10 w-32 items-center justify-center rounded-md bg-gradient-to-r from-green-500 to-emerald-500 text-lg hover:bg-gradient-to-l"
+				className="mx-auto mt-10 flex h-10 w-32 items-center justify-center rounded-md bg-gradient-to-r from-green-500 to-emerald-500 text-lg text-slate-50 hover:bg-gradient-to-l"
 				type="submit"
+				onClick={submitRatingHandler}
 			>
 				Submit
 			</button>
+			{/* react toastify container */}
+			<ToastContainer
+				position="bottom-right"
+				autoClose={4000}
+				hideProgressBar={false}
+				newestOnTop
+				closeOnClick={false}
+				rtl={false}
+				pauseOnFocusLoss
+				draggable={false}
+				pauseOnHover
+				theme="dark"
+				toastStyle={{ backgroundColor: '#111827' }}
+			/>
 		</>
 	);
 };
