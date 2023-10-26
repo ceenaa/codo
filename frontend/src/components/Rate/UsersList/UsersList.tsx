@@ -74,7 +74,7 @@ const UsersList: React.FC = () => {
 								<td className="tracking-tighter sm:text-base">{user.last_name}</td>
 								<td className="tracking-tighter">
 									<div className="mx-auto flex w-4/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
-										<span className="text-yellow-900">{user.average_rate}</span>
+										<span className="text-yellow-900">{user.average_rate?.toFixed(1)}</span>
 										<AiTwotoneStar className="text-yellow-600" />
 									</div>
 								</td>

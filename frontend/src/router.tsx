@@ -1,4 +1,5 @@
 // pages
+import History from './components/History/History';
 import Private from './components/Private/Private';
 import Rate from './components/Rate/Rate';
 import Source from './components/Source/Source';
@@ -17,7 +18,8 @@ const routes = [
 		),
 		children: [
 			{ path: 'rate', element: <Rate /> },
-			{ path: 'rate/:user', element: <Source /> }
+			{ path: 'rate/:user', element: <Source /> },
+			{ path: 'history', element: <History /> }
 		]
 	},
 	{ path: '/login', element: <Login /> },
