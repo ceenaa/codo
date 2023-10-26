@@ -65,7 +65,7 @@ const HistoryList: React.FC = () => {
 						>
 							<td className="text-base lg:text-lg">{index + 1}</td>
 							<td>{rate.rated_username}</td>
-							<td className="tracking-tighter sm:text-base">{rate.created_at}</td>
+							<td className="tracking-tighter sm:text-base">{rate.created_at.slice(0, 10)}</td>
 							<td className="tracking-tighter">
 								<div className="mx-auto flex w-4/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
 									<span className="text-yellow-900">{rate.rate}</span>

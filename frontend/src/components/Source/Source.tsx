@@ -45,20 +45,21 @@ const Source: React.FC = () => {
 	// tsx
 	return (
 		<>
-			<div className="container flex items-center justify-between py-5 text-2xl">
+			<div className="container flex flex-wrap items-center justify-between gap-y-5 py-5 text-2xl">
 				<div className="flex items-center gap-x-2">
 					<AiOutlineArrowLeft
 						className="block h-10 w-10 cursor-pointer rounded-full bg-rose-500/50 p-2 text-rose-500 transition-colors duration-500 hover:bg-rose-500/60"
 						onClick={() => navigate('/rate')}
 					/>
 					<h1 className="font-semibold text-rose-200">
-						{data?.first_name} {data?.last_name}
+						{data?.user.first_name} {data?.user.last_name}
 					</h1>
 				</div>
 				<div className="flex items-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
-					<span className="text-yellow-900">{data?.average_rate.toFixed(1)}</span>
+					<span className="text-yellow-900">{data?.user.average_rate.toFixed(1)}</span>
 					<AiTwotoneStar className="text-yellow-600" />
 				</div>
+				<span className="rounded-md bg-slate-400 px-3 py-1 text-slate-900">#{data?.rank}</span>
 			</div>
 			<main className="flex items-center justify-center pt-10">
 				<div className="flex gap-x-3">

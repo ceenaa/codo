@@ -2,7 +2,13 @@
 import axiosInstance from '../config/config';
 
 // rating
-const postUsersList = (listDetails: { text: string; page: number; per_page: number }) =>
+const getUserList = (listDetails: {
+	text: string;
+	page: number;
+	per_page: number;
+	order: string;
+	order_by: string;
+}) =>
 	axiosInstance.get(
 		`/users/list?text=${listDetails.text}&page=${listDetails.page}&per_page=${listDetails.per_page}
     `
@@ -12,4 +18,4 @@ const postUsersList = (listDetails: { text: string; page: number; per_page: numb
 const getUser = (userName: string) => axiosInstance.get(`/users/${userName}`);
 
 // exports
-export { postUsersList, getUser };
+export { getUserList, getUser };

@@ -41,7 +41,7 @@ const UsersList: React.FC = () => {
 			<thead className="h-16 border-b-2 border-slate-500">
 				<tr className="">
 					<td className="h-10 border-l border-rose-400 font-black text-slate-200 sm:text-sm">
-						NO.
+						Rank
 					</td>
 					<td className="h-10 border-l border-rose-400 font-black text-slate-200 sm:text-sm">
 						First Name

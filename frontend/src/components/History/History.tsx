@@ -1,17 +1,17 @@
 // react
 import React from 'react';
-import { useSelector } from 'react-redux';
-import useReceived from '../../hooks/useReceived';
 import HistoryList from './HistoryList/HistoryList';
 import Pagination from '../Rate/Pagintaion/Pagination';
+import HistoryChart from './HistoryChart/HistoryChart';
 
 // history
-const History = () => {
+const History: React.FC = () => {
 	// tsx
 	return (
 		<>
 			<HistoryList />
 			<Pagination />
+			<HistoryChart />
 		</>
 	);
 };
