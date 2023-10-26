@@ -176,9 +176,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/rating/recieved/{username}": {
+        "/rating/received/{username}": {
             "get": {
-                "description": "Get recieved ratings",
+                "description": "Get received ratings",
                 "consumes": [
                     "application/json"
                 ],
@@ -188,7 +188,7 @@ const docTemplate = `{
                 "tags": [
                     "Rating"
                 ],
-                "summary": "Get recieved ratings",
+                "summary": "Get received ratings",
                 "parameters": [
                     {
                         "type": "string",

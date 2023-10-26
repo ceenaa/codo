@@ -170,11 +170,11 @@ paths:
       summary: Get ratings
       tags:
       - Rating
-  /rating/recieved/{username}:
+  /rating/received/{username}:
     get:
       consumes:
       - application/json
-      description: Get recieved ratings
+      description: Get received ratings
       parameters:
       - description: Username
         in: path
@@ -204,7 +204,7 @@ paths:
           description: Ratings
           schema:
             $ref: '#/definitions/controllers.RatingOutput'
-      summary: Get recieved ratings
+      summary: Get received ratings
       tags:
       - Rating
   /users/{username}:
