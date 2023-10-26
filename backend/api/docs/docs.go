@@ -245,6 +245,18 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Order by",
+                        "name": "order_by",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Order",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "Text",
                         "name": "text",
                         "in": "query"
@@ -401,7 +413,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "User details",
+                        "description": "User details\" {int} rank \"User rank",
                         "schema": {
                             "$ref": "#/definitions/controllers.UserOutput"
                         }

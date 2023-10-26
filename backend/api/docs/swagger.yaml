@@ -220,7 +220,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: User details
+          description: User details" {int} rank "User rank
           schema:
             $ref: '#/definitions/controllers.UserOutput'
         "404":
@@ -234,6 +234,14 @@ paths:
     get:
       description: Get a list of users.
       parameters:
+      - description: Order by
+        in: query
+        name: order_by
+        type: string
+      - description: Order
+        in: query
+        name: order
+        type: string
       - description: Text
         in: query
         name: text

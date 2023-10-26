@@ -184,7 +184,7 @@ func Validate(c *gin.Context) {
 // @Success 200 {string} string "User details"
 // @Router /users/{username} [get]
 // @Response 404 {string} string "User not found"
-// @Response 200 {object} UserOutput "User details"
+// @Response 200 {object} UserOutput "User details" {int} rank "User rank"
 func UserDetails(c *gin.Context) {
 	var user UserOutput
 	username := c.Param("username")
@@ -193,8 +193,12 @@ func UserDetails(c *gin.Context) {
 		c.JSON(404, gin.H{"error": "User not found"})
 		return
 	}
+	var rank int64
+	initializers.DB.Model(&models.User{}).Order("average_rate desc").Where("average_rate > ?", user.AverageRate).Count(&rank)
+
 	c.JSON(http.StatusOK, gin.H{
 		"user": user,
+		"rank": rank + 1,
 	})
 
 }
@@ -203,6 +207,8 @@ func UserDetails(c *gin.Context) {
 // @Description Get a list of users.
 // @Tags Users
 // @Produce json
+// @Param order_by query string false "Order by"
+// @Param order query string false "Order"
 // @Param text query string false "Text"
 // @Param page query int false "Page"
 // @Param per_page query int false "Per page"
@@ -211,6 +217,8 @@ func UserDetails(c *gin.Context) {
 func UserList(c *gin.Context) {
 	var users []UserMinimalOutput
 	text := c.Query("text")
+	orderBy := c.DefaultQuery("order_by", "average_rate")
+	order := c.DefaultQuery("order", "desc")
 	page := c.DefaultQuery("page", "1")
 	perPage := c.DefaultQuery("per_page", "10")
 	pageNum, err := strconv.Atoi(page)
@@ -225,7 +233,8 @@ func UserList(c *gin.Context) {
 	}
 	startIdx := (pageNum - 1) * perPageNum
 	// search for users with text in username or first name or last name
-	initializers.DB.Model(&models.User{}).Where("username LIKE ? OR first_name LIKE ? OR last_name LIKE ?", "%"+text+"%", "%"+text+"%", "%"+text+"%").Limit(perPageNum).Offset(startIdx).Find(&users)
+	querySet := initializers.DB.Model(&models.User{}).Where("username LIKE ? OR first_name LIKE ? OR last_name LIKE ?", "%"+text+"%", "%"+text+"%", "%"+text+"%").Limit(perPageNum).Offset(startIdx)
+	querySet.Order(orderBy + " " + order).Find(&users)
 
 	c.JSON(http.StatusOK, gin.H{
 		"users": users,
