@@ -108,8 +108,8 @@ func RatingList(c *gin.Context) {
 	c.JSON(200, gin.H{"ratings": ratings})
 }
 
-// @Summary Get recieved ratings
-// @Description Get recieved ratings
+// @Summary Get received ratings
+// @Description Get received ratings
 // @Tags Rating
 // @Accept json
 // @Produce json
@@ -119,7 +119,7 @@ func RatingList(c *gin.Context) {
 // @Param order_by query string false "Order by"
 // @Param order query string false "Order"
 // @Success 200 {object} RatingOutput "Ratings"
-// @Router /rating/recieved/{username} [get]
+// @Router /rating/received/{username} [get]
 func GivenRattingList(c *gin.Context) {
 	var ratings []RatingOutput
 	page := c.DefaultQuery("page", "1")
@@ -158,7 +158,7 @@ func GivenRattingList(c *gin.Context) {
 // @Param order query string false "Order"
 // @Success 200 {object} RatingOutput "Ratings"
 // @Router /rating/given/{username} [get]
-func RecievedRattingList(c *gin.Context) {
+func ReceivedRattingList(c *gin.Context) {
 	var ratings []RatingOutput
 	page := c.DefaultQuery("page", "1")
 	perPage := c.DefaultQuery("per_page", "10")

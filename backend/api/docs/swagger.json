@@ -170,9 +170,9 @@
                 }
             }
         },
-        "/rating/recieved/{username}": {
+        "/rating/received/{username}": {
             "get": {
-                "description": "Get recieved ratings",
+                "description": "Get received ratings",
                 "consumes": [
                     "application/json"
                 ],
@@ -182,7 +182,7 @@
                 "tags": [
                     "Rating"
                 ],
-                "summary": "Get recieved ratings",
+                "summary": "Get received ratings",
                 "parameters": [
                     {
                         "type": "string",
