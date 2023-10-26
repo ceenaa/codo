@@ -56,7 +56,7 @@ const Source: React.FC = () => {
 					</h1>
 				</div>
 				<div className="flex items-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
-					<span className="text-yellow-900">{data?.average_rate}</span>
+					<span className="text-yellow-900">{data?.average_rate.toFixed(1)}</span>
 					<AiTwotoneStar className="text-yellow-600" />
 				</div>
 			</div>

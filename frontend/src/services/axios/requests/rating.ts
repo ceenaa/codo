@@ -14,7 +14,7 @@ const getReceived = (
 	order_by?: string
 ) =>
 	axiosInstance.get(
-		`rating/recieved/${userName}?page=${page}&per_page=${per_page}&order=${order}%order_by=${order_by}`,
+		`rating/received/${userName}?page=${page}&per_page=${per_page}&order=${order}%order_by=${order_by}`,
 		{
 			withCredentials: true
 		}

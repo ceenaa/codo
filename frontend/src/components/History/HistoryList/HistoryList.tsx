@@ -17,8 +17,6 @@ const HistoryList: React.FC = () => {
 	// GET history from redux
 	const history = useSelector((state: any) => state.history);
 
-	console.log(history);
-
 	// GET received from react query
 	const { data, isFetching, refetch } = useReceived(
 		userName,
