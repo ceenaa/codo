@@ -4,11 +4,13 @@ import { useDispatch } from 'react-redux';
 
 // reducers
 import User from './slices/User';
+import ListDetails from './slices/ListDetails';
 
 // store
 export const store = configureStore({
 	reducer: {
-		user: User
+		user: User,
+		listDetails: ListDetails
 	}
 });
 

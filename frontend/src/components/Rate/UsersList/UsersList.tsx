@@ -1,14 +1,39 @@
 // react
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // icons
 import { AiTwotoneStar } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+
+// react query
+import useUsersList from '../../../hooks/useUsersList';
+
+// redux
+import { useSelector } from 'react-redux';
+
+// types
+import { user } from '../../../types/User.type';
+
+// react spinner
+import { BeatLoader } from 'react-spinners';
 
 // user list
-const UsersList = () => {
+const UsersList: React.FC = () => {
 	// navigator
 	const navigate = useNavigate();
+
+	// GET list details from redux
+	const listDetails = useSelector((state: any) => state.listDetails);
+
+	// GET list details from redux
+	const self = useSelector((state: any) => state.user);
+
+	// GET userList from react query
+	const { data, refetch, isFetching } = useUsersList(listDetails);
+
+	useEffect(() => {
+		refetch();
+	}, [listDetails]);
 
 	// tsx
 	return (
@@ -30,34 +55,33 @@ const UsersList = () => {
 				</tr>
 			</thead>
 			<tbody>
-				<tr
-					className="h-20 cursor-pointer border-b border-slate-50 transition-all duration-500 hover:bg-rose-500/10"
-					onClick={() => navigate('lol1')}
-				>
-					<td className="font-Lalezar text-base lg:text-lg">1</td>
-					<td>Mahdi</td>
-					<td className="tracking-tighter sm:text-base">Abdollahi</td>
-					<td className="tracking-tighter">
-						<div className="mx-auto flex w-4/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
-							<span className="text-yellow-900">5.5</span>
-							<AiTwotoneStar className="text-yellow-600" />
-						</div>
-					</td>
-				</tr>
-				<tr
-					className="h-20 cursor-pointer border-b border-slate-50 transition-all duration-500 hover:bg-rose-500/10"
-					onClick={() => navigate('lol2')}
-				>
-					<td className="font-Lalezar text-base lg:text-lg">1</td>
-					<td>Mahdi</td>
-					<td className="tracking-tighter sm:text-base">Abdollahi</td>
-					<td className="tracking-tighter">
-						<div className="mx-auto flex w-4/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
-							<span className="text-yellow-900">5</span>
-							<AiTwotoneStar className="text-yellow-600" />
-						</div>
-					</td>
-				</tr>
+				{isFetching ? (
+					<tr className="absolute right-1/2 translate-y-10">
+						<td>
+							<BeatLoader size={10} color="#f43f5e" />
+						</td>
+					</tr>
+				) : (
+					data?.map((user: user) =>
+						user.username !== self.username ? (
+							<tr
+								key={user.user_id}
+								className="h-20 cursor-pointer border-b border-slate-50 transition-all duration-500 hover:bg-rose-500/10"
+								onClick={() => navigate(String(user.username))}
+							>
+								<td className="text-base lg:text-lg">{user.user_id}</td>
+								<td>{user.first_name}</td>
+								<td className="tracking-tighter sm:text-base">{user.last_name}</td>
+								<td className="tracking-tighter">
+									<div className="mx-auto flex w-4/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
+										<span className="text-yellow-900">{user.average_rate}</span>
+										<AiTwotoneStar className="text-yellow-600" />
+									</div>
+								</td>
+							</tr>
+						) : null
+					)
+				)}
 			</tbody>
 		</table>
 	);

@@ -26,7 +26,7 @@ const Header: React.FC<{
 	const navigate = useNavigate();
 
 	// GET user infos from redux
-	const user: user = useSelector((state: any) => state.user);
+	const user = useSelector((state: any) => state.user);
 
 	// logout fetch state
 	const [isFetching, seIsFetching] = useState<boolean>(false);
@@ -62,11 +62,10 @@ const Header: React.FC<{
 							onClick={() => navigate('/')}
 						/>
 						<span className="font-semibold text-rose-200">
-							{user.firstName} {user.lastName} |{' '}
+							{user.first_name} {user.last_name}
 						</span>
-						<span className="text-rose-400">{user.emailAddress}</span> |{' '}
 						<div className="flex items-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
-							<span className="text-yellow-900">{user.overallRate}</span>
+							<span className="text-yellow-900">{user.AverageRate}</span>
 							<AiTwotoneStar className="text-yellow-600" />
 						</div>
 					</span>

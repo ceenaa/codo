@@ -1,7 +1,8 @@
 export type user = {
-	firstName: string;
-	lastName: string;
-	emailAddress: string;
-	overallRate: number;
-	countOfRates: number;
+	average_rate: number;
+	first_name: string;
+	last_name: string;
+	role: string;
+	user_id: string;
+	username: string;
 };

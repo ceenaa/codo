@@ -1,24 +1,32 @@
 // redux
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-// types
-import { user } from '../../../types/User.type';
-
 // init value
-const initialState: user = {
-	firstName: 'Mahdi',
-	lastName: 'Abdollahi',
-	emailAddress: 'MAwasTaken@gmail.com',
-	overallRate: 5,
-	countOfRates: 0
-};
+const initialState: {
+	first_name: string;
+	last_name: string;
+	AverageRate: number;
+	message: string;
+	role: 'user' | 'admin';
+	username: string;
+} = { first_name: '', last_name: '', AverageRate: 0, message: '', role: 'user', username: '' };
 
 // page slice
 const slice = createSlice({
 	name: 'User',
 	initialState,
 	reducers: {
-		setUser: (state, action: PayloadAction<user>) => action.payload,
+		setUser: (
+			state,
+			action: PayloadAction<{
+				first_name: string;
+				last_name: string;
+				AverageRate: number;
+				message: string;
+				role: 'user' | 'admin';
+				username: string;
+			}>
+		) => action.payload,
 		clearUser: () => initialState
 	}
 });

@@ -7,6 +7,7 @@ import { FaStarOfLife } from 'react-icons/fa';
 // components
 import SearchInput from './SearchBar/SearchBar';
 import UsersList from './UsersList/UsersList';
+import Pagination from './Pagintaion/Pagination';
 
 // search bar
 const Rate: React.FC = () => {
@@ -19,6 +20,7 @@ const Rate: React.FC = () => {
 			</div>
 			<SearchInput />
 			<UsersList />
+			<Pagination />
 		</>
 	);
 };

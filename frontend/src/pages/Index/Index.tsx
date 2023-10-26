@@ -1,5 +1,5 @@
 // react
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 // components
@@ -8,7 +8,13 @@ import SideBar from '../../components/SideBar/SideBar';
 
 // index
 const Index: React.FC = () => {
+	// menu handler
 	const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
+
+	// change document name when mounting
+	useEffect(() => {
+		document.title = 'CODO';
+	}, []);
 
 	// tsx
 	return (
