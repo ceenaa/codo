@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample server Petstore server.",
+        "description": "This is a sample server RatingApp server.",
         "title": "Swagger Example API",
         "contact": {},
         "version": "1"
@@ -9,6 +9,34 @@
     "host": "localhost:8080",
     "basePath": "/api/",
     "paths": {
+        "/chart/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get chart details",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "chart"
+                ],
+                "summary": "Get chart details",
+                "responses": {
+                    "200": {
+                        "description": "Chart details",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/picture/upload": {
             "post": {
                 "security": [

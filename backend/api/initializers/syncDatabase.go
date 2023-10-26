@@ -11,4 +11,8 @@ func SyncDataBase() {
 	if err != nil {
 		panic("Error in migrating Rating")
 	}
+	err = DB.AutoMigrate(&models.ChartModel{})
+	if err != nil {
+		panic("Error in migrating ChartModel")
+	}
 }

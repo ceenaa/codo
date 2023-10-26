@@ -15,6 +15,34 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/chart/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get chart details",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "chart"
+                ],
+                "summary": "Get chart details",
+                "responses": {
+                    "200": {
+                        "description": "Chart details",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/picture/upload": {
             "post": {
                 "security": [
@@ -568,7 +596,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/api/",
 	Schemes:          []string{},
 	Title:            "Swagger Example API",
-	Description:      "This is a sample server Petstore server.",
+	Description:      "This is a sample server RatingApp server.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

@@ -63,10 +63,27 @@ definitions:
 host: localhost:8080
 info:
   contact: {}
-  description: This is a sample server Petstore server.
+  description: This is a sample server RatingApp server.
   title: Swagger Example API
   version: "1"
 paths:
+  /chart/list:
+    get:
+      consumes:
+      - application/json
+      description: Get chart details
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Chart details
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get chart details
+      tags:
+      - chart
   /picture/upload:
     post:
       consumes:
