@@ -15,7 +15,7 @@ func init() {
 
 // @title Swagger Example API
 // @version 1
-// @description This is a sample server Petstore server.
+// @description This is a sample server RatingApp server.
 
 // @host localhost:8080
 // @BasePath /api/
@@ -27,6 +27,7 @@ func main() {
 	routes.InitializeDocsRoutes(apiGroup)
 	routes.InitializeRatingRoutes(apiGroup)
 	routes.InitializePictureRoutes(apiGroup)
+	routes.InitializeChartRoutes(apiGroup)
 
 	// swagger
 
