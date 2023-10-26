@@ -24,16 +24,14 @@ type UserLoginRequest struct {
 	Password string `json:"password"`
 }
 type UserOutput struct {
-	CreatedAt       time.Time      `json:"created_at"`
-	ID              uint           `json:"user_id"`
-	Username        string         `json:"username"`
-	FirstName       string         `json:"first_name"`
-	LastName        string         `json:"last_name"`
-	AverageRate     float64        `json:"average_rate"`
-	TotalRaters     uint           `json:"total_raters"`
-	RecievedRatings []RatingOutput `gorm:"foreignKey:RaterID" json:"recieved_ratings"`
-	GivenRatings    []RatingOutput `gorm:"foreignKey:RaterID" json:"given_ratings"`
-	Role            string         `json:"role"`
+	CreatedAt   time.Time `json:"created_at"`
+	ID          uint      `json:"user_id"`
+	Username    string    `json:"username"`
+	FirstName   string    `json:"first_name"`
+	LastName    string    `json:"last_name"`
+	AverageRate float64   `json:"average_rate"`
+	TotalRaters uint      `json:"total_raters"`
+	Role        string    `json:"role"`
 }
 
 type UserMinimalOutput struct {
@@ -195,13 +193,6 @@ func UserDetails(c *gin.Context) {
 		c.JSON(404, gin.H{"error": "User not found"})
 		return
 	}
-	var recievedRatings []RatingOutput
-	var givenRatings []RatingOutput
-	initializers.DB.Model(&models.Rating{}).Where("rated_id = ?", user.ID).Find(&recievedRatings)
-	initializers.DB.Model(&models.Rating{}).Where("rater_id = ?", user.ID).Find(&givenRatings)
-	user.RecievedRatings = recievedRatings
-	user.GivenRatings = givenRatings
-
 	c.JSON(http.StatusOK, gin.H{
 		"user": user,
 	})

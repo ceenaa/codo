@@ -54,6 +54,62 @@ const docTemplate = `{
                 }
             }
         },
+        "/rating/given/{username}": {
+            "get": {
+                "description": "Get given ratings",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Rating"
+                ],
+                "summary": "Get given ratings",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Username",
+                        "name": "username",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Per page",
+                        "name": "per_page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Order by",
+                        "name": "order_by",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Order",
+                        "name": "order",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ratings",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.RatingOutput"
+                        }
+                    }
+                }
+            }
+        },
         "/rating/list": {
             "get": {
                 "security": [
@@ -98,15 +154,15 @@ const docTemplate = `{
                         "in": "query"
                     },
                     {
-                        "type": "integer",
-                        "description": "Rater ID",
-                        "name": "rater_id",
+                        "type": "string",
+                        "description": "Rater username",
+                        "name": "rater_username",
                         "in": "query"
                     },
                     {
-                        "type": "integer",
-                        "description": "Rated ID",
-                        "name": "rated_id",
+                        "type": "string",
+                        "description": "Rated username",
+                        "name": "rated_username",
                         "in": "query"
                     }
                 ],
@@ -115,6 +171,62 @@ const docTemplate = `{
                         "description": "Ratings",
                         "schema": {
                             "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/rating/recieved/{username}": {
+            "get": {
+                "description": "Get recieved ratings",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Rating"
+                ],
+                "summary": "Get recieved ratings",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Username",
+                        "name": "username",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Per page",
+                        "name": "per_page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Order by",
+                        "name": "order_by",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Order",
+                        "name": "order",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ratings",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.RatingOutput"
                         }
                     }
                 }
@@ -334,11 +446,11 @@ const docTemplate = `{
                 "rate": {
                     "type": "number"
                 },
-                "rated_id": {
-                    "type": "integer"
+                "rated_username": {
+                    "type": "string"
                 },
-                "rater_id": {
-                    "type": "integer"
+                "rater_username": {
+                    "type": "string"
                 }
             }
         },
@@ -365,20 +477,8 @@ const docTemplate = `{
                 "first_name": {
                     "type": "string"
                 },
-                "given_ratings": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/controllers.RatingOutput"
-                    }
-                },
                 "last_name": {
                     "type": "string"
-                },
-                "recieved_ratings": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/controllers.RatingOutput"
-                    }
                 },
                 "role": {
                     "type": "string"
