@@ -31,6 +31,7 @@ type UserOutput struct {
 	LastName    string    `json:"last_name"`
 	AverageRate float64   `json:"average_rate"`
 	TotalRaters uint      `json:"total_raters"`
+	PicturePath string    `json:"picture_path"`
 	Role        string    `json:"role"`
 }
 
@@ -40,6 +41,7 @@ type UserMinimalOutput struct {
 	FirstName   string  `json:"first_name"`
 	LastName    string  `json:"last_name"`
 	Role        string  `json:"role"`
+	PicturePath string  `json:"picture_path"`
 	AverageRate float64 `json:"average_rate"`
 }
 
