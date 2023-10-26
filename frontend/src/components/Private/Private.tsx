@@ -25,7 +25,7 @@ const Private: React.FC<React.PropsWithChildren> = ({ children }) => {
 	useEffect(() => {
 		getValidate().then((res) => {
 			setData(res.data);
-      
+
 			dispatch(setUser(res.data));
 		});
 	}, []);

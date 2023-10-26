@@ -20,7 +20,7 @@ const SearchInput: React.FC = () => {
 				type="text"
 				id="searchByName"
 				className="h-7 w-3/4 rounded-3xl bg-slate-700 px-5 text-lg font-bold tracking-tight text-slate-50 outline-none placeholder:tracking-tight placeholder:text-slate-300 md:h-10"
-				placeholder="Search By Name"
+				placeholder="Search"
 				onChange={(e) => dispatch(setText(String(e.target.value)))}
 			/>
 		</label>
