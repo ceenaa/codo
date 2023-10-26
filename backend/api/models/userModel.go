@@ -15,4 +15,5 @@ type User struct {
 	GivenRatings    []Rating `gorm:"foreignKey:RaterUsername"`
 	Password        string   `gorm:"NOT NULL" json:"-"`
 	Role            string   `gorm:"NOT NULL" Default:"user"`
+	PicturePath     string   `gorm:"NOT NULL" Default:"../../../media/default.png"`
 }
