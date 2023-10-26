@@ -26,6 +26,7 @@ func main() {
 	routes.InitializeUserRoutes(apiGroup)
 	routes.InitializeDocsRoutes(apiGroup)
 	routes.InitializeRatingRoutes(apiGroup)
+	routes.InitializePictureRoutes(apiGroup)
 
 	// swagger
 

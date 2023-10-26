@@ -67,6 +67,29 @@ info:
   title: Swagger Example API
   version: "1"
 paths:
+  /picture/upload:
+    post:
+      consumes:
+      - application/json
+      description: Upload picture
+      parameters:
+      - description: Picture
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Picture uploaded
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Upload picture
+      tags:
+      - Picture
   /rating/create:
     post:
       consumes:
