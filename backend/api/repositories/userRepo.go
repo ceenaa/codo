@@ -28,7 +28,7 @@ func GetUser(username string) (models.User, error) {
 
 func GetUserOutput(username string) (views.UserOutput, error) {
 	var user views.UserOutput
-	initializers.DB.First(&user, "username = ?", username)
+	initializers.DB.Model(&models.User{}).Where("username = ?", username).First(&user)
 	if user.ID == 0 {
 		return user, errors.New("user not found")
 	}

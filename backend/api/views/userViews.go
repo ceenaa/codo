@@ -22,7 +22,7 @@ type UserOutput struct {
 	AverageRate float64   `json:"average_rate"`
 	TotalRaters uint      `json:"total_raters"`
 	PicturePath string    `json:"picture_path"`
-	Rank        int64     `json:"rank"`
+	Rank        int64     `json:"rank" gorm:"-"`
 	Role        string    `json:"role"`
 }
 
