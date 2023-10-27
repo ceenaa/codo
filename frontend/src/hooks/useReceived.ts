@@ -12,13 +12,8 @@ const useReceived = (
 	order: string,
 	order_by: string
 ) =>
-	useQuery(
-		'User/List',
-		() => getReceived(userName, page, per_page, order, order_by).then((res) => res.data.ratings),
-		{
-			refetchOnWindowFocus: false,
-			refetchOnMount: false
-		}
+	useQuery('User/List', () =>
+		getReceived(userName, page, per_page, order, order_by).then((res) => res.data.ratings)
 	);
 
 // exports

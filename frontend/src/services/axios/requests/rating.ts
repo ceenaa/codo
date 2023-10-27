@@ -13,11 +13,8 @@ const getReceived = (
 	order?: string,
 	order_by?: string
 ) =>
-	axiosInstance.get(
-		`rating/received/${userName}?page=${page}&per_page=${per_page}&order=${order}%order_by=${order_by}`,
-		{
-			withCredentials: true
-		}
-	);
+	axiosInstance.get(`rating/received/${userName}?page=${page}&per_page=${per_page}`, {
+		withCredentials: true
+	});
 // exports
 export { postRating, getReceived };

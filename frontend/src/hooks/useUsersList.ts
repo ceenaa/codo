@@ -18,13 +18,8 @@ const useUsersList = ({
 	order: string;
 	order_by: string;
 }) =>
-	useQuery(
-		'User/List',
-		() => getUserList({ text, page, per_page, order, order_by }).then((res) => res.data.users),
-		{
-			refetchOnWindowFocus: false,
-			refetchOnMount: false
-		}
+	useQuery('User/List', () =>
+		getUserList({ text, page, per_page, order, order_by }).then((res) => res.data.users)
 	);
 
 // exports

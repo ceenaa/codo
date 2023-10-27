@@ -15,6 +15,9 @@ import { postRating } from '../../services/axios/requests/rating';
 // react toastify
 import { ToastContainer, toast } from 'react-toastify';
 
+// components
+import SourceProfile from './SourceProfile/SourceProfile';
+
 // rate user
 const Source: React.FC = () => {
 	// rate
@@ -55,11 +58,13 @@ const Source: React.FC = () => {
 						{data?.user.first_name} {data?.user.last_name}
 					</h1>
 				</div>
-				<div className="flex items-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
+				<div className="flex items-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 text-xs shadow-md md:text-lg">
 					<span className="text-yellow-900">{data?.user.average_rate.toFixed(1)}</span>
 					<AiTwotoneStar className="text-yellow-600" />
 				</div>
-				<span className="rounded-md bg-slate-400 px-3 py-1 text-slate-900">#{data?.rank}</span>
+				<span className="rounded-md bg-slate-400 px-3 py-1 text-xs text-slate-900 md:text-lg">
+					# {data?.rank}
+				</span>
 			</div>
 			<main className="flex items-center justify-center pt-10">
 				<div className="flex gap-x-3">
@@ -86,6 +91,7 @@ const Source: React.FC = () => {
 			>
 				Submit
 			</button>
+			{user ? <SourceProfile username={user} /> : null}
 			{/* react toastify container */}
 			<ToastContainer
 				position="bottom-right"
@@ -98,7 +104,7 @@ const Source: React.FC = () => {
 				draggable={false}
 				pauseOnHover
 				theme="dark"
-				toastStyle={{ backgroundColor: '#111827' }}
+				toastStyle={{ backgroundColor: '#1f2937' }}
 			/>
 		</>
 	);

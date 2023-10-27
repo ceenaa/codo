@@ -61,11 +61,13 @@ const HistoryList: React.FC = () => {
 					data?.map((rate: any, index: number) => (
 						<tr
 							key={index}
-							className="h-20 cursor-pointer border-b border-slate-50 transition-all duration-500 hover:bg-rose-500/10"
+							className="h-20 border-b border-slate-50 transition-all duration-500 hover:bg-rose-500/10"
 						>
-							<td className="text-base lg:text-lg">{index + 1}</td>
+							<td className="text-base lg:text-lg">
+								{(history.page - 1) * history.per_page + index + 1}
+							</td>
 							<td>{rate.rated_username}</td>
-							<td className="tracking-tighter sm:text-base">{rate.created_at.slice(0, 10)}</td>
+							<td className="tracking-tighter sm:text-base">{rate.created_at?.slice(0, 10)}</td>
 							<td className="tracking-tighter">
 								<div className="mx-auto flex w-4/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
 									<span className="text-yellow-900">{rate.rate}</span>

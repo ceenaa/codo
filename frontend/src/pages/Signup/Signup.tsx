@@ -190,7 +190,7 @@ const SignUp: React.FC = () => {
 				draggable={false}
 				pauseOnHover
 				theme="dark"
-				toastStyle={{ backgroundColor: '#111827' }}
+				toastStyle={{ backgroundColor: '#1f2937' }}
 			/>
 		</div>
 	);

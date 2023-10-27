@@ -62,18 +62,20 @@ const UsersList: React.FC = () => {
 						</td>
 					</tr>
 				) : (
-					data?.map((user: user) =>
+					data?.map((user: user, index: number) =>
 						user.username !== self.username ? (
 							<tr
 								key={user.user_id}
 								className="h-20 cursor-pointer border-b border-slate-50 transition-all duration-500 hover:bg-rose-500/10"
 								onClick={() => navigate(String(user.username))}
 							>
-								<td className="text-base lg:text-lg">{user.user_id}</td>
+								<td className="text-base lg:text-lg">
+									{(listDetails.page - 1) * listDetails.per_page + index + 1}
+								</td>
 								<td>{user.first_name}</td>
 								<td className="tracking-tighter sm:text-base">{user.last_name}</td>
 								<td className="tracking-tighter">
-									<div className="mx-auto flex w-4/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
+									<div className="mx-auto shrink-0 flex w-4/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
 										<span className="text-yellow-900">{user.average_rate?.toFixed(1)}</span>
 										<AiTwotoneStar className="text-yellow-600" />
 									</div>
