@@ -1,5 +1,46 @@
-# codo
-A rating app based on S3E1 black mirror for codocodile contest. </br>
+
+# CoroCodile | Bruv
+
+
+
+## Authors
+
+- [@Mahdi Abdollahi](https://github.com/MAwasTaken)
+- [@Sina Moradi](https://github.com/ceenaa)
+- [@Amirata Ghaffarian](https://github.com/amirata051)
+- [@Hossein Ghermezcheshme](https://github.com/HosseinGh82)
+
+
+
+## Documentation
+
+A rating app based on S3E1 black mirror for codocodile contest.
 Developed with GO(Gin + Gorm) and TypeScript(React)
-# How to setup backend
-[backend](https://github.com/ceenaa/codo/blob/main/backend/README.md)
+
+
+## Run Locally - Frontend
+
+```bash
+  cd frontend/
+  npm install
+  npm run dev
+```
+
+## Run Locally - Backend
+
+```bash
+  cd backend/
+  cd api/
+  go mod download
+  cp .env.example .env
+  go run main.go
+```
+    
+## API Reference
+
+#### Swagger
+
+```http
+  http://localhost:8080/api/docs/index.html
+```
+
