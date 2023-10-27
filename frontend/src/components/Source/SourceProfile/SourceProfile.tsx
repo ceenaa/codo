@@ -12,12 +12,18 @@ const SourceProfile: React.FC<{ username: string }> = ({ username }) => {
 	// GET user from react query
 	const { data } = useSingleUser(username);
 
+	console.log(data);
+
 	// tsx
 	return (
 		<main className="mt-10 flex h-96 items-center justify-center">
 			<div className="flex h-auto w-10/12 flex-col items-center justify-center rounded-xl border border-slate-300 md:w-3/4">
 				<div className="flex w-full justify-center">
-					<img src="/media/default.png" alt="user profile" className="h-40 w-40 rounded-full" />
+					<img
+						src={`http://localhost:8080/${data?.user.picture_path}`}
+						alt="user profile"
+						className="h-40 w-40 rounded-full"
+					/>
 					<div className="flex w-1/2 flex-col items-center justify-evenly gap-y-5">
 						<span className="text-2xl font-bold">{data?.user.username}</span>
 						<div className="flex items-center justify-between gap-x-10">

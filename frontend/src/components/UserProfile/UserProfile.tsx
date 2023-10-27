@@ -16,7 +16,6 @@ import { postProfilePicture } from '../../services/axios/requests/picture';
 // react toastify
 import { ToastContainer, toast } from 'react-toastify';
 
-
 // icons
 import { FaStarOfLife } from 'react-icons/fa';
 
@@ -47,7 +46,7 @@ const UserProfile: React.FC = () => {
 						<label htmlFor="imageUploader">
 							{data?.user.picture_path ? (
 								<img
-									src={`http://localhost:8080/media/pic/${data.user.picture_path}`}
+									src={`http://localhost:8080/${data.user.picture_path}`}
 									alt="user profile"
 									className="h-40 w-40 rounded-full"
 								/>
