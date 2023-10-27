@@ -88,7 +88,7 @@ const UsersList: React.FC = () => {
 								<td>{user.first_name}</td>
 								<td className="tracking-tighter sm:text-base">{user.last_name}</td>
 								<td className="tracking-tighter">
-									<div className="mx-auto flex w-3/12 shrink-0 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
+									<div className="mx-auto flex w-4/12 shrink-0 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md md:w-3/12">
 										<span className="text-yellow-900">{user.average_rate?.toFixed(2)}</span>
 										<AiTwotoneStar className="text-yellow-600" />
 									</div>
@@ -105,7 +105,7 @@ const UsersList: React.FC = () => {
 								<td>{user.first_name}</td>
 								<td className="tracking-tighter sm:text-base">{user.last_name}</td>
 								<td className="tracking-tighter">
-									<div className="mx-auto flex w-3/12 shrink-0 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
+									<div className="mx-auto flex w-4/12 shrink-0 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md md:w-3/12">
 										<span className="text-yellow-900">{user.average_rate?.toFixed(2)}</span>
 										<AiTwotoneStar className="text-yellow-600" />
 									</div>
