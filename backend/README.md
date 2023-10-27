@@ -23,3 +23,10 @@ go run main.go
 ```
 http://localhost:8080/api/docs/index.html
 ```
+# Tech
+- GO
+- Gin
+- Gorm
+- Sqlite3
+- docker
+- Nginx(on website)
