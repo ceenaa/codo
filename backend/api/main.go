@@ -30,7 +30,8 @@ func main() {
 	routes.InitializePictureRoutes(apiGroup)
 	routes.InitializeChartRoutes(apiGroup)
 
-	// swagger
+	// media
+	r.StaticFS("/media", gin.Dir("../../media", false))
 
 	// run of 8000
 	r.Run()
