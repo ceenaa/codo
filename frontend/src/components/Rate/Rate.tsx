@@ -14,7 +14,7 @@ const Rate: React.FC = () => {
 	// mounting side effects
 	useEffect(() => {
 		// change document title
-		document.title = `Codo | Bruv - Rate`;
+		document.title = `Codo | Bruv - Scoreboard`;
 	}, []);
 
 	// tsx
