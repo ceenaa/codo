@@ -27,8 +27,12 @@ func UpdateChartTable() {
 }
 
 func ChartDetails(username string) ([]models.ChartModel, error) {
+	user, err := repositories.GetUser(username)
+	if err != nil {
+		return nil, err
+	}
 	var charts []models.ChartModel
-	charts, err := repositories.GetChartsPoint(username)
+	charts, err = repositories.GetChartsPoint(user.Username)
 	if err != nil {
 		return charts, err
 	}

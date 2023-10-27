@@ -9,17 +9,18 @@ import (
 // ChartDetails godoc
 // @Summary Get chart details
 // @Description Get chart details
-// @Tags chart
+// @Tags Chart
 // @Accept json
 // @Produce json
+// @Param username path string true "Username"
 // @Security ApiKeyAuth
 // @Success 200 {object} object "Chart details"
-// @Router /chart/list [get]
+// @Router /chart/list/{username} [get]
 func ChartDetails(c *gin.Context) {
-	user := c.MustGet("user").(models.User)
+	username := c.Param("username")
 	var charts []models.ChartModel
 	var err error
-	charts, err = service.ChartDetails(user.Username)
+	charts, err = service.ChartDetails(username)
 	if err != nil {
 		c.JSON(400, gin.H{"message": "Error while getting chart details"})
 		return

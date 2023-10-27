@@ -1,6 +1,15 @@
 basePath: /api/
 definitions:
-  controllers.CreateUserRequest:
+  views.CreateRatingInput:
+    properties:
+      rate:
+        type: integer
+      rated_username:
+        type: string
+    required:
+    - rated_username
+    type: object
+  views.CreateUserRequest:
     properties:
       first_name:
         type: string
@@ -13,25 +22,14 @@ definitions:
       username:
         type: string
     type: object
-  controllers.RatingOutput:
-    properties:
-      created_at:
-        type: string
-      rate:
-        type: number
-      rated_username:
-        type: string
-      rater_username:
-        type: string
-    type: object
-  controllers.UserLoginRequest:
+  views.UserLoginRequest:
     properties:
       password:
         type: string
       username:
         type: string
     type: object
-  controllers.UserOutput:
+  views.UserOutput:
     properties:
       average_rate:
         type: number
@@ -41,6 +39,10 @@ definitions:
         type: string
       last_name:
         type: string
+      picture_path:
+        type: string
+      rank:
+        type: integer
       role:
         type: string
       total_raters:
@@ -50,16 +52,6 @@ definitions:
       username:
         type: string
     type: object
-  controllers.createRatingInput:
-    properties:
-      rate:
-        type: number
-      rated_username:
-        type: string
-    required:
-    - rate
-    - rated_username
-    type: object
 host: localhost:8080
 info:
   contact: {}
@@ -67,11 +59,17 @@ info:
   title: Swagger Example API
   version: "1"
 paths:
-  /chart/list:
+  /chart/list/{username}:
     get:
       consumes:
       - application/json
       description: Get chart details
+      parameters:
+      - description: Username
+        in: path
+        name: username
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -83,7 +81,7 @@ paths:
       - ApiKeyAuth: []
       summary: Get chart details
       tags:
-      - chart
+      - Chart
   /picture/upload:
     post:
       consumes:
@@ -118,7 +116,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/controllers.createRatingInput'
+          $ref: '#/definitions/views.CreateRatingInput'
       produces:
       - application/json
       responses:
@@ -129,43 +127,6 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: Create a new rating
-      tags:
-      - Rating
-  /rating/given/{username}:
-    get:
-      consumes:
-      - application/json
-      description: Get given ratings
-      parameters:
-      - description: Username
-        in: path
-        name: username
-        required: true
-        type: string
-      - description: Page
-        in: query
-        name: page
-        type: integer
-      - description: Per page
-        in: query
-        name: per_page
-        type: integer
-      - description: Order by
-        in: query
-        name: order_by
-        type: string
-      - description: Order
-        in: query
-        name: order
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Ratings
-          schema:
-            $ref: '#/definitions/controllers.RatingOutput'
-      summary: Get given ratings
       tags:
       - Rating
   /rating/list:
@@ -210,43 +171,6 @@ paths:
       summary: Get ratings
       tags:
       - Rating
-  /rating/received/{username}:
-    get:
-      consumes:
-      - application/json
-      description: Get received ratings
-      parameters:
-      - description: Username
-        in: path
-        name: username
-        required: true
-        type: string
-      - description: Page
-        in: query
-        name: page
-        type: integer
-      - description: Per page
-        in: query
-        name: per_page
-        type: integer
-      - description: Order by
-        in: query
-        name: order_by
-        type: string
-      - description: Order
-        in: query
-        name: order
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Ratings
-          schema:
-            $ref: '#/definitions/controllers.RatingOutput'
-      summary: Get received ratings
-      tags:
-      - Rating
   /users/{username}:
     get:
       description: Get the details of a user.
@@ -262,7 +186,7 @@ paths:
         "200":
           description: User details" {int} rank "User rank
           schema:
-            $ref: '#/definitions/controllers.UserOutput'
+            $ref: '#/definitions/views.UserOutput'
         "404":
           description: User not found
           schema:
@@ -315,7 +239,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/controllers.UserLoginRequest'
+          $ref: '#/definitions/views.UserLoginRequest'
       produces:
       - application/json
       responses:
@@ -350,7 +274,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/controllers.CreateUserRequest'
+          $ref: '#/definitions/views.CreateUserRequest'
       produces:
       - application/json
       responses:

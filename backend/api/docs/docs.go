@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/chart/list": {
+        "/chart/list/{username}": {
             "get": {
                 "security": [
                     {
@@ -30,9 +30,18 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "chart"
+                    "Chart"
                 ],
                 "summary": "Get chart details",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Username",
+                        "name": "username",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Chart details",
@@ -105,7 +114,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/controllers.createRatingInput"
+                            "$ref": "#/definitions/views.CreateRatingInput"
                         }
                     }
                 ],
@@ -114,62 +123,6 @@ const docTemplate = `{
                         "description": "Rating created",
                         "schema": {
                             "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/rating/given/{username}": {
-            "get": {
-                "description": "Get given ratings",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Rating"
-                ],
-                "summary": "Get given ratings",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Username",
-                        "name": "username",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Page",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Per page",
-                        "name": "per_page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Order by",
-                        "name": "order_by",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Order",
-                        "name": "order",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Ratings",
-                        "schema": {
-                            "$ref": "#/definitions/controllers.RatingOutput"
                         }
                     }
                 }
@@ -236,62 +189,6 @@ const docTemplate = `{
                         "description": "Ratings",
                         "schema": {
                             "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/rating/received/{username}": {
-            "get": {
-                "description": "Get received ratings",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Rating"
-                ],
-                "summary": "Get received ratings",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Username",
-                        "name": "username",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Page",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Per page",
-                        "name": "per_page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Order by",
-                        "name": "order_by",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Order",
-                        "name": "order",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Ratings",
-                        "schema": {
-                            "$ref": "#/definitions/controllers.RatingOutput"
                         }
                     }
                 }
@@ -369,7 +266,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/controllers.UserLoginRequest"
+                            "$ref": "#/definitions/views.UserLoginRequest"
                         }
                     }
                 ],
@@ -423,7 +320,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/controllers.CreateUserRequest"
+                            "$ref": "#/definitions/views.CreateUserRequest"
                         }
                     }
                 ],
@@ -480,7 +377,7 @@ const docTemplate = `{
                     "200": {
                         "description": "User details\" {int} rank \"User rank",
                         "schema": {
-                            "$ref": "#/definitions/controllers.UserOutput"
+                            "$ref": "#/definitions/views.UserOutput"
                         }
                     },
                     "404": {
@@ -494,7 +391,21 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "controllers.CreateUserRequest": {
+        "views.CreateRatingInput": {
+            "type": "object",
+            "required": [
+                "rated_username"
+            ],
+            "properties": {
+                "rate": {
+                    "type": "integer"
+                },
+                "rated_username": {
+                    "type": "string"
+                }
+            }
+        },
+        "views.CreateUserRequest": {
             "type": "object",
             "properties": {
                 "first_name": {
@@ -514,24 +425,7 @@ const docTemplate = `{
                 }
             }
         },
-        "controllers.RatingOutput": {
-            "type": "object",
-            "properties": {
-                "created_at": {
-                    "type": "string"
-                },
-                "rate": {
-                    "type": "number"
-                },
-                "rated_username": {
-                    "type": "string"
-                },
-                "rater_username": {
-                    "type": "string"
-                }
-            }
-        },
-        "controllers.UserLoginRequest": {
+        "views.UserLoginRequest": {
             "type": "object",
             "properties": {
                 "password": {
@@ -542,7 +436,7 @@ const docTemplate = `{
                 }
             }
         },
-        "controllers.UserOutput": {
+        "views.UserOutput": {
             "type": "object",
             "properties": {
                 "average_rate": {
@@ -557,6 +451,12 @@ const docTemplate = `{
                 "last_name": {
                     "type": "string"
                 },
+                "picture_path": {
+                    "type": "string"
+                },
+                "rank": {
+                    "type": "integer"
+                },
                 "role": {
                     "type": "string"
                 },
@@ -567,21 +467,6 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "username": {
-                    "type": "string"
-                }
-            }
-        },
-        "controllers.createRatingInput": {
-            "type": "object",
-            "required": [
-                "rate",
-                "rated_username"
-            ],
-            "properties": {
-                "rate": {
-                    "type": "number"
-                },
-                "rated_username": {
                     "type": "string"
                 }
             }

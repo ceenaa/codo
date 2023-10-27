@@ -14,7 +14,7 @@ import (
 // @Tags Authentication
 // @Accept json
 // @Produce json
-// @Param body body CreateUserRequest true "User credentials"
+// @Param body body views.CreateUserRequest true "User credentials"
 // @Success 200 {string} string "User created"
 // @Router /users/signup [post]
 func SignUp(c *gin.Context) {
@@ -40,7 +40,7 @@ func SignUp(c *gin.Context) {
 // @Tags Authentication
 // @Accept json
 // @Produce json
-// @Param body body UserLoginRequest true "User credentials"
+// @Param body body views.UserLoginRequest true "User credentials"
 // @Success 200 {string} string "User logged in"
 // @Router /users/login [post]
 func Login(c *gin.Context) {
@@ -100,7 +100,7 @@ func Validate(c *gin.Context) {
 // @Success 200 {string} string "User details"
 // @Router /users/{username} [get]
 // @Response 404 {string} string "User not found"
-// @Response 200 {object} UserOutput "User details" {int} rank "User rank"
+// @Response 200 {object} views.UserOutput "User details" {int} rank "User rank"
 func UserDetails(c *gin.Context) {
 	var user views.UserOutput
 	var err error

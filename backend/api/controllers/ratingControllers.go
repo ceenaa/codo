@@ -13,7 +13,7 @@ import (
 // @Tags Rating
 // @Accept json
 // @Produce json
-// @Param body body createRatingInput true "Rating"
+// @Param body body views.CreateRatingInput true "Rating"
 // @Security ApiKeyAuth
 // @Success 200 {string} string "Rating created"
 // @Router /rating/create [post]
