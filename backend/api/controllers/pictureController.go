@@ -40,7 +40,7 @@ func UploadPicture(c *gin.Context) {
 		c.JSON(400, gin.H{"error": "Failed to upload file"})
 		return
 	}
-	path = "/media/pic/" + user.Username + "." + fileFormat
+	path = "media/pic/" + user.Username + "." + fileFormat
 	user.PicturePath = path
 	initializers.DB.Save(&user)
 
