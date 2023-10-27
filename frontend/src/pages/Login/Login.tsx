@@ -34,7 +34,7 @@ const SignUp: React.FC = () => {
 	// mounting side effects
 	useEffect(() => {
 		// change document title
-		document.title = 'CodoCodile | Bruv - Login';
+		document.title = 'Codo | Bruv - Login';
 	}, []);
 
 	// tsx

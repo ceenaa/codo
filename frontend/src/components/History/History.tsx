@@ -18,7 +18,7 @@ const History: React.FC = () => {
 	// mounting side effects
 	useEffect(() => {
 		// change document title
-		document.title = `CodoCodile | Bruv - History`;
+		document.title = `Codo | Bruv - History`;
 	}, []);
 
   // GET username from redux state

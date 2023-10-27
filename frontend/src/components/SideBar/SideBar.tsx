@@ -2,13 +2,14 @@
 import { NavLink } from 'react-router-dom';
 
 // icons
-import { AiOutlinePlus, AiOutlineStar } from 'react-icons/ai';
+import { AiOutlineHome } from 'react-icons/ai';
 import { BiHistory } from 'react-icons/bi';
+import { GiStarsStack } from 'react-icons/gi';
 
 // redux
-import { setRatePage, setRatePerPage, setText } from '../../services/redux/slices/ListDetails';
-import { setHistoryPage, setHistoryPerPage } from '../../services/redux/slices/HistoryPagination';
 import { useDispatch } from 'react-redux';
+import { setHistoryPage, setHistoryPerPage } from '../../services/redux/slices/HistoryPagination';
+import { setRatePage, setRatePerPage, setText } from '../../services/redux/slices/ListDetails';
 
 // sidebar
 const SideBar: React.FC<{
@@ -17,6 +18,7 @@ const SideBar: React.FC<{
 }> = ({ isMenuShown, setIsMenuShown }) => {
 	// redux dispatch hook
 	const dispatch = useDispatch();
+
 	// tsx
 	return (
 		<>
@@ -39,7 +41,7 @@ const SideBar: React.FC<{
 								} `
 							}
 						>
-							<AiOutlineStar className="text-rose-500" />
+							<AiOutlineHome className="text-rose-500" />
 							User Info
 						</NavLink>
 					</li>
@@ -59,8 +61,8 @@ const SideBar: React.FC<{
 								} `
 							}
 						>
-							<AiOutlinePlus className="text-rose-500" />
-							New Rate
+							<GiStarsStack className="text-rose-500" />
+							Scoreboard
 						</NavLink>
 					</li>
 					<li className="text-center" onClick={() => setIsMenuShown(false)}>

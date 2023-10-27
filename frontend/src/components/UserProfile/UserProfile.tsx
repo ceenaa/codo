@@ -1,11 +1,12 @@
 // react
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 // icons
-import { AiTwotoneStar } from 'react-icons/ai';
+import { AiOutlinePlus, AiOutlineSearch, AiTwotoneStar } from 'react-icons/ai';
 
 // redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setText } from '../../services/redux/slices/ListDetails';
 
 // react query
 import useSingleUser from '../../hooks/useSingleUser';
@@ -18,9 +19,16 @@ import { ToastContainer, toast } from 'react-toastify';
 
 // icons
 import { FaStarOfLife } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 // user profile
 const UserProfile: React.FC = () => {
+	// navigator
+	const navigate = useNavigate();
+
+	// redux dispatch hook
+	const dispatch = useDispatch();
+
 	// GET user from redux
 	const user = useSelector((state: any) => state.user);
 
@@ -30,7 +38,7 @@ const UserProfile: React.FC = () => {
 	// mounting side effects
 	useEffect(() => {
 		// change document title
-		document.title = `CodoCodile | Bruv - ${user.username}`;
+		document.title = `Codo | Bruv - ${user.username}`;
 	}, []);
 
 	// tsx
@@ -40,8 +48,8 @@ const UserProfile: React.FC = () => {
 				<FaStarOfLife className="text-rose-500" />
 				<span className="text-2xl font-semibold text-slate-300">Public Profile</span>
 			</div>
-			<main className="flex h-96 items-center justify-center pt-20">
-				<div className="flex h-auto w-10/12 flex-col items-center justify-center rounded-xl border border-slate-300 md:w-3/4">
+			<main className="flex h-screen flex-col items-center gap-y-5">
+				<div className="flex h-auto w-10/12 flex-col items-center justify-center rounded-xl border border-slate-300 pt-5 md:w-3/4">
 					<div className="flex w-full justify-center">
 						<label htmlFor="imageUploader">
 							{data?.user.picture_path ? (
@@ -101,6 +109,29 @@ const UserProfile: React.FC = () => {
 						</p>
 					</div>
 				</div>
+				<section className="flex w-full flex-col self-start">
+					<div className="container flex items-center gap-x-2 py-5">
+						<AiOutlinePlus className="h-7 w-7 text-rose-500" />
+						<span className="text-2xl font-semibold text-slate-300">New Rate</span>
+					</div>
+					<label
+						htmlFor="searchByName"
+						className="flex w-full items-center justify-center gap-x-5 pt-5"
+					>
+						<AiOutlineSearch className="h-7 w-7 rounded-full bg-rose-500/50 p-1.5 text-rose-500 hover:bg-rose-500/50 md:h-10 md:w-10 md:p-2" />
+						<input
+							type="text"
+							id="searchByName"
+							className="h-7 w-1/2 rounded-3xl bg-slate-700 px-5 text-lg font-bold tracking-tight text-slate-50 outline-none placeholder:tracking-tight placeholder:text-slate-300 md:h-10"
+							placeholder="Search"
+							onChange={(e) => {
+								dispatch(setText(String(e.target.value)));
+
+								navigate('/rate');
+							}}
+						/>
+					</label>
+				</section>
 			</main>
 			{/* react toastify container */}
 			<ToastContainer

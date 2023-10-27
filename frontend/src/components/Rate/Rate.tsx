@@ -14,7 +14,7 @@ const Rate: React.FC = () => {
 	// mounting side effects
 	useEffect(() => {
 		// change document title
-		document.title = `CodoCodile | Bruv - Rate`;
+		document.title = `Codo | Bruv - Rate`;
 	}, []);
 
 	// tsx
@@ -22,7 +22,7 @@ const Rate: React.FC = () => {
 		<>
 			<div className="container flex items-center gap-x-2 py-5">
 				<FaStarOfLife className="text-rose-500" />
-				<h1 className="text-2xl font-semibold text-slate-300">Rate New Person</h1>
+				<h1 className="text-2xl font-semibold text-slate-300">Scoreboard</h1>
 			</div>
 			<SearchInput />
 			<UsersList />

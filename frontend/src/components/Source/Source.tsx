@@ -1,5 +1,5 @@
 // react
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // icons
@@ -48,6 +48,12 @@ const Source: React.FC = () => {
 				toast.error('Something went wrong ❌');
 			});
 	};
+
+	// mounting side effects
+	useEffect(() => {
+		// change document title
+		document.title = `Codo | Bruv - Rate : ${user}`;
+	}, []);
 
 	// is Shown User History
 	const [isShownHistory, setIsShownHistory] = useState<boolean>(false);

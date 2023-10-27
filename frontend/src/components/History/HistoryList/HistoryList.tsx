@@ -13,9 +13,13 @@ import { BeatLoader } from 'react-spinners';
 // icons
 import { AiTwotoneStar } from 'react-icons/ai';
 import { TbDatabaseX } from 'react-icons/tb';
+import { useNavigate } from 'react-router-dom';
 
 // history list
 const HistoryList: React.FC = () => {
+	// navigator
+	const navigate = useNavigate();
+
 	// GET username from redux
 	const userName = useSelector((state: any) => state.user.username);
 
@@ -72,7 +76,8 @@ const HistoryList: React.FC = () => {
 					data?.map((rate: any, index: number) => (
 						<tr
 							key={index}
-							className="h-20 border-b border-slate-50 transition-all duration-500 hover:bg-rose-500/10"
+							className="h-20 cursor-pointer border-b border-slate-50 transition-all duration-500 hover:bg-rose-500/10"
+							onClick={() => navigate(`/rate/${rate.rated_username}`)}
 						>
 							<td className="text-base lg:text-lg">
 								{(history.page - 1) * history.per_page + index + 1}
