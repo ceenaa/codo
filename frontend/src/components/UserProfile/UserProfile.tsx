@@ -116,7 +116,7 @@ const UserProfile: React.FC = () => {
 					</div>
 					<label
 						htmlFor="searchByName"
-						className="flex w-full items-center justify-center gap-x-5 pt-5"
+						className="flex w-full items-center justify-center gap-x-5 pt-5 pb-20"
 					>
 						<AiOutlineSearch className="h-7 w-7 rounded-full bg-rose-500/50 p-1.5 text-rose-500 hover:bg-rose-500/50 md:h-10 md:w-10 md:p-2" />
 						<input
