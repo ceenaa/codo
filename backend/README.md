@@ -1,4 +1,4 @@
-# How to set up the project
+# How to set up the project in dev mode baremetal
 
 ## Install dependencies
 
