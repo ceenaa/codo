@@ -26,7 +26,7 @@ func UploadPicture(c *gin.Context) {
 
 	user := c.MustGet("user").(models.User)
 	fileFormat := strings.Split(file.Filename, ".")[1]
-	path := "../../frontend/public/media" + user.Username + "." + fileFormat
+	path := "../../frontend/public/media/" + user.Username + "." + fileFormat
 
 	if os.IsExist(err) {
 		err := os.Remove(path)
