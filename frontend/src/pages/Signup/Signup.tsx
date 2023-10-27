@@ -177,7 +177,7 @@ const SignUp: React.FC = () => {
 								isDisable ? 'animate-bounce bg-rose-700' : null
 							}`}
 						>
-							{!isDisable ? 'Signup' : 'wait a second ⏳'}
+							{!isDisable ? 'Signup' : 'Signup ⏳'}
 						</button>
 					</form>
 				</main>
