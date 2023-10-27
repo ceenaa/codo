@@ -7,9 +7,9 @@ import (
 	"errors"
 )
 
-func UpdateUserRatings(user models.User, rate float64) error {
+func UpdateUserRatings(user models.User, rate int) error {
 	var total = user.AverageRate * float64(user.TotalRaters)
-	total += rate
+	total += float64(rate)
 	user.TotalRaters++
 	user.AverageRate = total / float64(user.TotalRaters)
 	err := repositories.UpdateUser(&user)

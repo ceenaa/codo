@@ -22,8 +22,9 @@ func CreateRating(c *gin.Context) {
 	var err error
 	var body views.CreateRatingInput
 	user = c.MustGet("user").(models.User)
-	if c.Bind(&body) != nil {
-		c.JSON(400, gin.H{"error": "Fields to read body"})
+	err = c.BindJSON(&body)
+	if err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 	err = service.CreateRating(user, body)
