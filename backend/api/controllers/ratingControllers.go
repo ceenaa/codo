@@ -55,7 +55,7 @@ func RatingList(c *gin.Context) {
 	perPage := c.DefaultQuery("per_page", "10")
 	orderBy := c.DefaultQuery("order_by", "created_at")
 	raterUsername := c.DefaultQuery("rater_username", "")
-	ratedUsername := c.DefaultQuery("rater_username", "")
+	ratedUsername := c.DefaultQuery("rated_username", "")
 	order := c.DefaultQuery("order", "desc")
 	pageNum, err := strconv.Atoi(page)
 	if err != nil {
