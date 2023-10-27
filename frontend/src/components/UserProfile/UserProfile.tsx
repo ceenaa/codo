@@ -1,5 +1,5 @@
 // react
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // icons
 import { AiTwotoneStar } from 'react-icons/ai';
@@ -16,6 +16,7 @@ import { postProfilePicture } from '../../services/axios/requests/picture';
 // react toastify
 import { ToastContainer, toast } from 'react-toastify';
 
+
 // icons
 import { FaStarOfLife } from 'react-icons/fa';
 
@@ -27,8 +28,11 @@ const UserProfile: React.FC = () => {
 	// GET user from react query
 	const { data } = useSingleUser(user.username);
 
-	// image uploader
-	const [image, setImage] = useState<any>();
+	// mounting side effects
+	useEffect(() => {
+		// change document title
+		document.title = `CodoCodile | Bruv - ${user.username}`;
+	}, []);
 
 	// tsx
 	return (
@@ -41,11 +45,11 @@ const UserProfile: React.FC = () => {
 				<div className="flex h-auto w-10/12 flex-col items-center justify-center rounded-xl border border-slate-300 md:w-3/4">
 					<div className="flex w-full justify-center">
 						<label htmlFor="imageUploader">
-							{image ? (
+							{data?.user.picture_path ? (
 								<img
-									src={URL.createObjectURL(image[0])}
+									src={`http://localhost:8080/media/pic/${data.user.picture_path}`}
 									alt="user profile"
-									className="mt-5 h-40 w-40 rounded-full"
+									className="h-40 w-40 rounded-full"
 								/>
 							) : (
 								<img
@@ -60,8 +64,6 @@ const UserProfile: React.FC = () => {
 								id="file-input"
 								accept="image/*"
 								onChange={(e) => {
-									setImage(e.target.files);
-
 									const formData = new FormData();
 									e.target.files ? formData.append('file', e.target.files[0]) : null;
 
@@ -75,11 +77,11 @@ const UserProfile: React.FC = () => {
 							<span className="text-2xl font-bold">{user.username}</span>
 							<div className="flex items-center justify-between gap-x-10">
 								<div className="flex items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
-									<span className="text-yellow-900">{user.AverageRate?.toFixed(1)}</span>
+									<span className="text-yellow-900">{user.AverageRate?.toFixed(2)}</span>
 									<AiTwotoneStar className="text-yellow-600" />
 								</div>
 								<span className="rounded-md bg-slate-400 px-3 py-1 text-slate-900">
-									#{data?.rank}
+									#{data?.user.rank}
 								</span>
 							</div>
 						</div>
@@ -104,7 +106,7 @@ const UserProfile: React.FC = () => {
 			{/* react toastify container */}
 			<ToastContainer
 				position="bottom-right"
-				autoClose={4000}
+				autoClose={2500}
 				hideProgressBar={false}
 				newestOnTop
 				closeOnClick={false}

@@ -7,14 +7,17 @@ const postRating = (rateDetails: { rate: number; rated_username: string }) =>
 
 // received rating
 const getReceived = (
-	userName: string,
+	rater_username?: string,
+	rated_username?: string,
 	page?: number,
-	per_page?: number,
-	order?: string,
-	order_by?: string
+	per_page?: number
 ) =>
-	axiosInstance.get(`rating/received/${userName}?page=${page}&per_page=${per_page}`, {
-		withCredentials: true
-	});
+	axiosInstance.get(
+		`rating/list?rated_username=${rated_username}&rater_username=${rater_username}&page=${page}&per_page=${per_page}`,
+		{
+			withCredentials: true
+		}
+	);
+
 // exports
 export { postRating, getReceived };

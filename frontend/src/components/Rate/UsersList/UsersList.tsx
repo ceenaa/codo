@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 // icons
 import { AiTwotoneStar } from 'react-icons/ai';
+import { TbDatabaseX } from 'react-icons/tb';
 
 // react query
 import useUsersList from '../../../hooks/useUsersList';
@@ -61,6 +62,18 @@ const UsersList: React.FC = () => {
 							<BeatLoader size={10} color="#f43f5e" />
 						</td>
 					</tr>
+				) : data.length === 0 ? (
+					<>
+						<tr>
+							<td></td>
+							<td className="flex h-20 translate-x-16 items-center justify-center gap-x-3 text-rose-300">
+								<TbDatabaseX className="h-10 w-10 rounded-full bg-rose-500/50 p-2 text-rose-500" />
+								No Data Found !
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+					</>
 				) : (
 					data?.map((user: user, index: number) =>
 						user.username !== self.username ? (
@@ -75,13 +88,30 @@ const UsersList: React.FC = () => {
 								<td>{user.first_name}</td>
 								<td className="tracking-tighter sm:text-base">{user.last_name}</td>
 								<td className="tracking-tighter">
-									<div className="mx-auto shrink-0 flex w-4/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
-										<span className="text-yellow-900">{user.average_rate?.toFixed(1)}</span>
+									<div className="mx-auto flex w-4/12 shrink-0 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
+										<span className="text-yellow-900">{user.average_rate?.toFixed(2)}</span>
 										<AiTwotoneStar className="text-yellow-600" />
 									</div>
 								</td>
 							</tr>
-						) : null
+						) : (
+							<tr
+								key={user.user_id}
+								className="h-20 cursor-no-drop border-b border-slate-50 bg-rose-500/20 transition-all duration-500"
+							>
+								<td className="text-base lg:text-lg">
+									{(listDetails.page - 1) * listDetails.per_page + index + 1}
+								</td>
+								<td>{user.first_name}</td>
+								<td className="tracking-tighter sm:text-base">{user.last_name}</td>
+								<td className="tracking-tighter">
+									<div className="mx-auto flex w-4/12 shrink-0 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
+										<span className="text-yellow-900">{user.average_rate?.toFixed(2)}</span>
+										<AiTwotoneStar className="text-yellow-600" />
+									</div>
+								</td>
+							</tr>
+						)
 					)
 				)}
 			</tbody>

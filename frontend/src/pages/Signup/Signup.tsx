@@ -17,6 +17,7 @@ import { BiRename } from 'react-icons/bi';
 import { CgRename } from 'react-icons/cg';
 import { AiFillLock } from 'react-icons/ai';
 import { GrBlockQuote } from 'react-icons/gr';
+import { GiFlame } from 'react-icons/gi';
 
 // sign up
 const SignUp: React.FC = () => {
@@ -35,18 +36,22 @@ const SignUp: React.FC = () => {
 	// mounting side effects
 	useEffect(() => {
 		// change document title
-		document.title = 'CODO - Signup';
+		document.title = 'CodoCodile | Bruv - Signup';
 	}, []);
 
 	// jsx
 	return (
-		<div className="flex h-screen items-center justify-center">
+		<div className="flex h-screen flex-col items-center justify-center">
 			{/* container */}
 			<div
 				className={`flex h-auto flex-col items-center justify-between gap-y-7 rounded-3xl bg-slate-900 p-10 transition-opacity duration-300 md:w-5/12 ${
 					isLoad ? 'opacity-100' : 'opacity-0'
 				}`}
 			>
+				<h1 className="flex items-center justify-center gap-x-5 text-xl font-black tracking-wide text-slate-200">
+					<GiFlame className="h-10 w-10 rounded-full bg-slate-500/50 p-2 text-slate-400" />
+					CodoCodile | Bruv
+				</h1>
 				{/* inputs */}
 				<main>
 					{/* form */}
@@ -75,7 +80,6 @@ const SignUp: React.FC = () => {
 										draggable: true,
 										progress: undefined,
 										theme: 'dark',
-										progressStyle: { backgroundColor: '#0ea5e9' },
 										onOpen: () => {
 											setTimeout(() => {
 												// navigate to panel
@@ -158,7 +162,7 @@ const SignUp: React.FC = () => {
 							<AiFillLock className="h-7 w-7 rounded-full bg-rose-500/50 p-1.5 text-rose-500 hover:bg-rose-500/50 md:h-10 md:w-10 md:p-2" />
 							<input
 								required
-								type="text"
+								type="password"
 								id="password"
 								className="h-7 w-3/4 rounded-3xl bg-slate-700 px-5 text-base font-bold tracking-tight text-slate-50 outline-none placeholder:tracking-tight placeholder:text-slate-300 md:h-10 md:text-lg"
 								placeholder="password"
@@ -173,15 +177,24 @@ const SignUp: React.FC = () => {
 								isDisable ? 'animate-bounce bg-rose-700' : null
 							}`}
 						>
-							{!isDisable ? 'Signup' : 'Loading ⏳'}
+							{!isDisable ? 'Signup' : 'wait a second ⏳'}
 						</button>
 					</form>
 				</main>
 			</div>
+			<p className="pt-5 text-xs font-bold text-rose-50">
+				Already Have An Account ?{' '}
+				<Link
+					to="/login"
+					className="rounded-lg p-2 text-rose-300 transition-all duration-500 hover:bg-rose-500/50 "
+				>
+					Login
+				</Link>
+			</p>
 			{/* react toastify container */}
 			<ToastContainer
 				position="bottom-right"
-				autoClose={4000}
+				autoClose={2500}
 				hideProgressBar={false}
 				newestOnTop
 				closeOnClick={false}

@@ -14,13 +14,12 @@ const slice = createSlice({
 	name: 'ListDetails',
 	initialState,
 	reducers: {
-		setPage: (state, action: PayloadAction<number>) => void (state.page = action.payload),
-		setPerPage: (state, action: PayloadAction<number>) => void (state.per_page = action.payload),
-		setOrder: (state, action: PayloadAction<string>) => void (state.order = action.payload),
-		setOrderBy: (state, action: PayloadAction<string>) => void (state.order_by = action.payload)
+		setHistoryPage: (state, action: PayloadAction<number>) => void (state.page = action.payload),
+		setHistoryPerPage: (state, action: PayloadAction<number>) =>
+			void (state.per_page = action.payload)
 	}
 });
 
 // exports
-export const { setPage, setPerPage, setOrder, setOrderBy } = slice.actions;
+export const { setHistoryPage, setHistoryPerPage } = slice.actions;
 export default slice.reducer;

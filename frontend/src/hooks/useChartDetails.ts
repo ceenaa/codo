@@ -5,8 +5,10 @@ import { useQuery } from 'react-query';
 import { getChartDetails } from '../services/axios/requests/chart';
 
 // use received
-const useChartDetails = () =>
-	useQuery('Chart/List', () => getChartDetails().then((res) => res.data.charts));
+const useChartDetails = (username: string) =>
+	useQuery('Chart/List', () => getChartDetails(username).then((res) => res.data.charts),{
+    refetchOnWindowFocus: false
+  });
 
 // exports
 export default useChartDetails;

@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // iconss
 import { FaStarOfLife } from 'react-icons/fa';
@@ -7,10 +7,16 @@ import { FaStarOfLife } from 'react-icons/fa';
 // components
 import SearchInput from './SearchBar/SearchBar';
 import UsersList from './UsersList/UsersList';
-import Pagination from './Pagintaion/Pagination';
+import Pagination from './RatePagintaion/RatePagination';
 
 // search bar
 const Rate: React.FC = () => {
+	// mounting side effects
+	useEffect(() => {
+		// change document title
+		document.title = `CodoCodile | Bruv - Rate`;
+	}, []);
+
 	// tsx
 	return (
 		<>

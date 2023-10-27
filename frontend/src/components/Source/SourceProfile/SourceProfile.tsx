@@ -14,7 +14,7 @@ const SourceProfile: React.FC<{ username: string }> = ({ username }) => {
 
 	// tsx
 	return (
-		<main className="flex h-96 items-center justify-center mt-10">
+		<main className="mt-10 flex h-96 items-center justify-center">
 			<div className="flex h-auto w-10/12 flex-col items-center justify-center rounded-xl border border-slate-300 md:w-3/4">
 				<div className="flex w-full justify-center">
 					<img src="/media/default.png" alt="user profile" className="h-40 w-40 rounded-full" />
@@ -22,11 +22,11 @@ const SourceProfile: React.FC<{ username: string }> = ({ username }) => {
 						<span className="text-2xl font-bold">{data?.user.username}</span>
 						<div className="flex items-center justify-between gap-x-10">
 							<div className="flex items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
-								<span className="text-yellow-900">{data?.user.average_rate?.toFixed(1)}</span>
+								<span className="text-yellow-900">{data?.user.average_rate?.toFixed(2)}</span>
 								<AiTwotoneStar className="text-yellow-600" />
 							</div>
 							<span className="rounded-md bg-slate-400 px-3 py-1 text-slate-900">
-								#{data?.rank}
+								#{data?.user.rank}
 							</span>
 						</div>
 					</div>

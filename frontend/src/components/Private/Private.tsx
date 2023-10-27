@@ -21,17 +21,16 @@ const Private: React.FC<React.PropsWithChildren> = ({ children }) => {
 
 	const [data, setData] = useState();
 
-	// POST validate user token
+	// GET validate user token
 	useEffect(() => {
-		getValidate().then((res) => {
-			setData(res.data);
+		getValidate()
+			.then((res) => {
+				setData(res.data);
 
-			dispatch(setUser(res.data));
-		});
+				dispatch(setUser(res.data));
+			})
+			.catch(() => navigate('/login'));
 	}, []);
-
-	// set user data to redux store
-	// data ? dispatch(setUser(data)) : null;
 
 	// tsx
 	return <>{data ? <>{children}</> : navigate('/login')}</>;

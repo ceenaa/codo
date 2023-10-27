@@ -5,11 +5,18 @@ import { NavLink } from 'react-router-dom';
 import { AiOutlinePlus, AiOutlineStar } from 'react-icons/ai';
 import { BiHistory } from 'react-icons/bi';
 
+// redux
+import { setRatePage, setRatePerPage, setText } from '../../services/redux/slices/ListDetails';
+import { setHistoryPage, setHistoryPerPage } from '../../services/redux/slices/HistoryPagination';
+import { useDispatch } from 'react-redux';
+
 // sidebar
 const SideBar: React.FC<{
 	isMenuShown: boolean;
 	setIsMenuShown: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ isMenuShown, setIsMenuShown }) => {
+	// redux dispatch hook
+	const dispatch = useDispatch();
 	// tsx
 	return (
 		<>
@@ -39,6 +46,11 @@ const SideBar: React.FC<{
 					<li className="text-center" onClick={() => setIsMenuShown(false)}>
 						<NavLink
 							to="rate"
+							onClick={() => {
+								dispatch(setRatePage(1));
+								dispatch(setRatePerPage(10));
+								dispatch(setText(''));
+							}}
 							className={({ isActive }) =>
 								`flex items-center justify-center gap-x-2 rounded py-1 tracking-tighter hover:bg-rose-500/50 ${
 									isActive
@@ -54,6 +66,10 @@ const SideBar: React.FC<{
 					<li className="text-center" onClick={() => setIsMenuShown(false)}>
 						<NavLink
 							to="history"
+							onClick={() => {
+								dispatch(setHistoryPage(1));
+								dispatch(setHistoryPerPage(10));
+							}}
 							className={({ isActive }) =>
 								`flex items-center justify-center gap-x-2 rounded py-1 tracking-tighter hover:bg-rose-500/50 ${
 									isActive

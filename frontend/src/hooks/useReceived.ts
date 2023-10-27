@@ -6,14 +6,18 @@ import { getReceived } from '../services/axios/requests/rating';
 
 // use received
 const useReceived = (
-	userName: string,
+	rater_username: string,
+	rated_username: string,
 	page: number,
-	per_page: number,
-	order: string,
-	order_by: string
+	per_page: number
 ) =>
-	useQuery('User/List', () =>
-		getReceived(userName, page, per_page, order, order_by).then((res) => res.data.ratings)
+	useQuery(
+		'User/List',
+		() =>
+			getReceived(rater_username, rated_username, page, per_page).then((res) => res.data.ratings),
+		{
+			refetchOnWindowFocus: false
+		}
 	);
 
 // exports

@@ -6,7 +6,7 @@ import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { setPage, setPerPage } from '../../../services/redux/slices/ListDetails';
+import { setRatePage, setRatePerPage } from '../../../services/redux/slices/ListDetails';
 
 // peer pagination
 function Pagination() {
@@ -23,7 +23,7 @@ function Pagination() {
 				<label className="select-none text-base text-rose-300">User Per Page:</label>
 				<select
 					className="h-7 w-10 appearance-none rounded-xl bg-slate-700 text-center text-lg tracking-wider outline-none transition-colors hover:bg-slate-600"
-					onChange={(e) => dispatch(setPerPage(Number(e.target.value)))}
+					onChange={(e) => dispatch(setRatePerPage(Number(e.target.value)))}
 					value={listDetails.perPage}
 				>
 					<option value="10">10</option>
@@ -36,7 +36,7 @@ function Pagination() {
 			<div className="flex items-center self-end">
 				<button
 					className="flex h-7 w-[60px] cursor-pointer select-none items-center justify-center gap-x-3 rounded-l-xl bg-slate-800 px-3 text-sm transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-white/10"
-					onClick={() => dispatch(setPage(Number(listDetails.page - 1)))}
+					onClick={() => dispatch(setRatePage(Number(listDetails.page - 1)))}
 					disabled={listDetails.page === 1 ? true : false}
 				>
 					<BsArrowLeft className="h-5 w-5 shrink-0" />
@@ -46,8 +46,7 @@ function Pagination() {
 				</div>
 				<button
 					className="flex h-7 w-[60px] cursor-pointer select-none items-center justify-center gap-x-3 rounded-r-xl bg-slate-800 px-3 transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-white/10"
-					onClick={() => dispatch(setPage(Number(listDetails.page + 1)))}
-					// disabled={listDetails.page === Math.ceil(Math.max(allPeers, activePeers, deActivePeers) / perPage)}
+					onClick={() => dispatch(setRatePage(Number(listDetails.page + 1)))}
 				>
 					<BsArrowRight className="h-5 w-5" />
 				</button>

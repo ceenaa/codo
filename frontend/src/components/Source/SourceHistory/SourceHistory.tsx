@@ -1,29 +1,26 @@
 // react
 import React, { useEffect } from 'react';
 
+// icons
+import { TbDatabaseX } from 'react-icons/tb';
+import { AiTwotoneStar } from 'react-icons/ai';
+
 // redux
 import { useSelector } from 'react-redux';
-
-// react query
-import useReceived from '../../../hooks/useReceived';
 
 // react spinier
 import { BeatLoader } from 'react-spinners';
 
-// icons
-import { AiTwotoneStar } from 'react-icons/ai';
-import { TbDatabaseX } from 'react-icons/tb';
+// react query
+import useReceived from '../../../hooks/useReceived';
 
-// history list
-const HistoryList: React.FC = () => {
+// source history
+const SourceHistory: React.FC<{ username: string }> = ({ username }) => {
 	// GET username from redux
-	const userName = useSelector((state: any) => state.user.username);
-
-	// GET history from redux
-	const history = useSelector((state: any) => state.history);
+	const raterUsername = useSelector((state: any) => state.user.username);
 
 	// GET received from react query
-	const { data, isFetching, refetch } = useReceived(userName, '', history.page, history.per_page);
+	const { data, isFetching, refetch } = useReceived(raterUsername, username, 1, 100);
 
 	// refetch when changing pagination
 	useEffect(() => {
@@ -32,14 +29,11 @@ const HistoryList: React.FC = () => {
 
 	// tsx
 	return (
-		<table className="mx-auto mt-10 w-11/12 table-auto border border-slate-500 text-center  md:border-2">
+		<table className="mx-auto mb-5 w-11/12 table-auto border border-slate-500 text-center  md:border-2">
 			<thead className="h-16 border-b-2 border-slate-500">
 				<tr className="">
 					<td className="h-10 border-l border-rose-400 font-black text-slate-200 sm:text-sm">
 						NO.
-					</td>
-					<td className="h-10 border-l border-rose-400 font-black text-slate-200 sm:text-sm">
-						Rater User Name
 					</td>
 					<td className="h-10 border-l border-rose-400 font-black text-slate-200 sm:text-sm">
 						Date
@@ -60,7 +54,7 @@ const HistoryList: React.FC = () => {
 					<>
 						<tr>
 							<td></td>
-							<td className="flex h-20 translate-x-16 items-center justify-center gap-x-3 text-rose-300">
+							<td className="flex h-20 items-center justify-center gap-x-3 text-center text-rose-300">
 								<TbDatabaseX className="h-10 w-10 rounded-full bg-rose-500/50 p-2 text-rose-500" />
 								No Data Found !
 							</td>
@@ -74,13 +68,10 @@ const HistoryList: React.FC = () => {
 							key={index}
 							className="h-20 border-b border-slate-50 transition-all duration-500 hover:bg-rose-500/10"
 						>
-							<td className="text-base lg:text-lg">
-								{(history.page - 1) * history.per_page + index + 1}
-							</td>
-							<td>{rate.rated_username}</td>
+							<td className="text-base lg:text-lg">{index + 1}</td>
 							<td className="tracking-tighter sm:text-base">{rate.created_at?.slice(0, 10)}</td>
 							<td className="tracking-tighter">
-								<div className="mx-auto flex w-4/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
+								<div className="mx-auto flex w-3/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
 									<span className="text-yellow-900">{rate.rate}</span>
 									<AiTwotoneStar className="text-yellow-600" />
 								</div>
@@ -94,4 +85,4 @@ const HistoryList: React.FC = () => {
 };
 
 // exports
-export default HistoryList;
+export default SourceHistory;

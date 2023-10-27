@@ -65,7 +65,7 @@ const Header: React.FC<{
 							{user.first_name} {user.last_name}
 						</span>
 						<div className="flex items-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
-							<span className="text-yellow-900">{user.AverageRate.toFixed(1)}</span>
+							<span className="text-yellow-900">{user.AverageRate.toFixed(2)}</span>
 							<AiTwotoneStar className="text-yellow-600" />
 						</div>
 					</span>
@@ -81,7 +81,7 @@ const Header: React.FC<{
 			{/* react toastify container */}
 			<ToastContainer
 				position="bottom-right"
-				autoClose={4000}
+				autoClose={2500}
 				hideProgressBar={false}
 				newestOnTop
 				closeOnClick={false}

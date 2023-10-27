@@ -1,10 +1,12 @@
 // react
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // icons
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { AiOutlineArrowLeft, AiOutlineLineChart } from 'react-icons/ai';
 import { AiOutlineStar, AiFillStar, AiTwotoneStar } from 'react-icons/ai';
+import { CiViewTable } from 'react-icons/ci';
+import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 
 // react query
 import useSingleUser from '../../hooks/useSingleUser';
@@ -17,6 +19,8 @@ import { ToastContainer, toast } from 'react-toastify';
 
 // components
 import SourceProfile from './SourceProfile/SourceProfile';
+import SourceHistory from './SourceHistory/SourceHistory';
+import HistoryChart from '../History/HistoryChart/HistoryChart';
 
 // rate user
 const Source: React.FC = () => {
@@ -45,6 +49,12 @@ const Source: React.FC = () => {
 			});
 	};
 
+	// is Shown User History
+	const [isShownHistory, setIsShownHistory] = useState<boolean>(false);
+
+	// is Shown History chart
+	const [isShownChart, setIsShownChart] = useState<boolean>(true);
+
 	// tsx
 	return (
 		<>
@@ -58,12 +68,12 @@ const Source: React.FC = () => {
 						{data?.user.first_name} {data?.user.last_name}
 					</h1>
 				</div>
-				<div className="flex items-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 text-xs shadow-md md:text-lg">
-					<span className="text-yellow-900">{data?.user.average_rate.toFixed(1)}</span>
+				<div className="flex select-none items-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 text-xs shadow-md md:text-lg">
+					<span className="text-yellow-900">{data?.user.average_rate.toFixed(2)}</span>
 					<AiTwotoneStar className="text-yellow-600" />
 				</div>
-				<span className="rounded-md bg-slate-400 px-3 py-1 text-xs text-slate-900 md:text-lg">
-					# {data?.rank}
+				<span className="select-none rounded-md bg-slate-400 px-3 py-1 text-xs text-slate-900 md:text-lg">
+					# {data?.user.rank}
 				</span>
 			</div>
 			<main className="flex items-center justify-center pt-10">
@@ -85,17 +95,47 @@ const Source: React.FC = () => {
 				</div>
 			</main>
 			<button
-				className="mx-auto mt-10 flex h-10 w-32 items-center justify-center rounded-md bg-gradient-to-r from-green-500 to-emerald-500 text-lg text-slate-50 hover:bg-gradient-to-l"
+				className="mx-auto mt-10 flex h-10 w-32 items-center justify-center rounded-md bg-gradient-to-tl from-emerald-600 to-green-400 text-lg font-extrabold text-slate-50 hover:bg-gradient-to-br"
 				type="submit"
 				onClick={submitRatingHandler}
 			>
 				Submit
 			</button>
 			{user ? <SourceProfile username={user} /> : null}
+			<div
+				className="group container flex cursor-pointer select-none items-center gap-x-2 py-5"
+				onClick={() => setIsShownChart(!isShownChart)}
+			>
+				<AiOutlineLineChart className="h-7 w-7 text-rose-500" />
+				<span className="text-2xl font-semibold text-slate-300 transition-all duration-500 group-hover:text-rose-200">
+					History Chart
+				</span>
+				{isShownChart ? (
+					<BiChevronDown className="h-8 w-8 cursor-pointer rounded-lg p-1 text-rose-500 transition-all duration-500 group-hover:bg-rose-500/50" />
+				) : (
+					<BiChevronUp className="h-8 w-8 cursor-pointer rounded-lg p-1 text-rose-500 transition-all duration-500 group-hover:bg-rose-500/50" />
+				)}
+			</div>
+			{user && isShownChart ? <HistoryChart username={user} /> : null}
+			<div
+				className="group container flex cursor-pointer select-none items-center gap-x-2 py-5"
+				onClick={() => setIsShownHistory(!isShownHistory)}
+			>
+				<CiViewTable className="h-7 w-7 text-rose-500" />
+				<span className="text-2xl font-semibold text-slate-300 transition-all duration-500 group-hover:text-rose-200">
+					Last Interactions
+				</span>
+				{isShownHistory ? (
+					<BiChevronDown className="h-8 w-8 cursor-pointer rounded-lg p-1 text-rose-500 transition-all duration-500 group-hover:bg-rose-500/50" />
+				) : (
+					<BiChevronUp className="h-8 w-8 cursor-pointer rounded-lg p-1 text-rose-500 transition-all duration-500 group-hover:bg-rose-500/50" />
+				)}
+			</div>
+			{user && isShownHistory ? <SourceHistory username={user} /> : null}
 			{/* react toastify container */}
 			<ToastContainer
 				position="bottom-right"
-				autoClose={4000}
+				autoClose={2500}
 				hideProgressBar={false}
 				newestOnTop
 				closeOnClick={false}

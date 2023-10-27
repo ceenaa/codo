@@ -11,11 +11,6 @@ const Index: React.FC = () => {
 	// menu handler
 	const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
 
-	// change document name when mounting
-	useEffect(() => {
-		document.title = 'CODO';
-	}, []);
-
 	// tsx
 	return (
 		<>

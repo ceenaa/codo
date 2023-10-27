@@ -1,23 +1,32 @@
 // react
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 
 // rechart
-import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from 'recharts';
 
 // react query
 import useChartDetails from '../../../hooks/useChartDetails';
 
+// redux
+import { useSelector } from 'react-redux';
+
 // history chart
-const HistoryChart: React.FC = () => {
+const HistoryChart: React.FC<{ username: string }> = ({ username }) => {
 	// GET chart details from react query
-	const { data } = useChartDetails();
+	const { data } = useChartDetails(username);
+
+	// change Date format
+	data?.map((item: any) => (item.Date = item.Date.slice(0, 10)));
 
 	// tsx
 	return (
 		<LineChart
-			className=" mx-auto"
-			width={document.documentElement.clientWidth * 0.5}
+			className=" z-50 mx-auto"
+			width={
+				document.documentElement.clientWidth > 768
+					? document.documentElement.clientWidth * 0.5
+					: document.documentElement.clientWidth * 0.9
+			}
 			height={400}
 			data={data}
 		>

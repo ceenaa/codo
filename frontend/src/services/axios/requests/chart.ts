@@ -2,7 +2,8 @@
 import axiosInstance from '../config/config';
 
 // chart details
-const getChartDetails = () => axiosInstance.get('/chart/list', { withCredentials: true });
+const getChartDetails = (username: string) =>
+	axiosInstance.get(`/chart/list/${username}`, { withCredentials: true });
 
 // exports
 export { getChartDetails };
