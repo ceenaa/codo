@@ -12,8 +12,6 @@ const SourceProfile: React.FC<{ username: string }> = ({ username }) => {
 	// GET user from react query
 	const { data } = useSingleUser(username);
 
-	console.log(data);
-
 	// tsx
 	return (
 		<main className="mt-10 flex h-96 items-center justify-center">

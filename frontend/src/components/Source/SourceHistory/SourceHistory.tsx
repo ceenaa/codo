@@ -20,7 +20,7 @@ const SourceHistory: React.FC<{ username: string }> = ({ username }) => {
 	const raterUsername = useSelector((state: any) => state.user.username);
 
 	// GET received from react query
-	const { data, isFetching, refetch } = useReceived(raterUsername, username, 1, 100);
+	const { data, isFetching, refetch } = useReceived(raterUsername, username, 1, 20);
 
 	// refetch when changing pagination
 	useEffect(() => {
@@ -71,7 +71,7 @@ const SourceHistory: React.FC<{ username: string }> = ({ username }) => {
 							<td className="text-base lg:text-lg">{index + 1}</td>
 							<td className="tracking-tighter sm:text-base">{rate.created_at?.slice(0, 10)}</td>
 							<td className="tracking-tighter">
-								<div className="mx-auto flex w-3/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
+								<div className="mx-auto flex w-5/12 md:w-3/12 lg:w-2/12 items-center justify-center gap-x-1 rounded-md bg-yellow-300/90 px-2 py-1 shadow-md">
 									<span className="text-yellow-900">{rate.rate}</span>
 									<AiTwotoneStar className="text-yellow-600" />
 								</div>

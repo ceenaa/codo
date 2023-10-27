@@ -56,7 +56,7 @@ const Source: React.FC = () => {
 	}, []);
 
 	// is Shown User History
-	const [isShownHistory, setIsShownHistory] = useState<boolean>(false);
+	const [isShownHistory, setIsShownHistory] = useState<boolean>(true);
 
 	// is Shown History chart
 	const [isShownChart, setIsShownChart] = useState<boolean>(true);

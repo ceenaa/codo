@@ -2,13 +2,10 @@
 import React from 'react';
 
 // rechart
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 
 // react query
 import useChartDetails from '../../../hooks/useChartDetails';
-
-// redux
-import { useSelector } from 'react-redux';
 
 // history chart
 const HistoryChart: React.FC<{ username: string }> = ({ username }) => {
@@ -31,7 +28,7 @@ const HistoryChart: React.FC<{ username: string }> = ({ username }) => {
 			data={data}
 		>
 			<XAxis dataKey="Date" />
-			<YAxis dataKey="AverageRate" />
+			<YAxis dataKey="AverageRate" domain={[0, 5]} scale={'linear'} />
 			<CartesianGrid />
 			<Line type="monotone" dataKey="AverageRate" stroke="#f43f5e" />
 		</LineChart>
