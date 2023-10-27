@@ -4,10 +4,7 @@ import (
 	"backend/initializers"
 	"backend/models"
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"os"
-	"path"
-	"path/filepath"
 	"strings"
 )
 
@@ -47,16 +44,4 @@ func UploadPicture(c *gin.Context) {
 	user.PicturePath = path
 	initializers.DB.Save(&user)
 
-}
-
-func ServeMedia(c *gin.Context) {
-	dir := c.Param("dir")
-	asset := c.Param("asset")
-	if strings.TrimPrefix(asset, "/") == "" {
-		c.AbortWithStatus(http.StatusNotFound)
-		return
-	}
-	dir = "../../../media/" + dir
-	fullName := filepath.Join(dir, filepath.FromSlash(path.Clean("/"+asset)))
-	c.File(fullName)
 }
