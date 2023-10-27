@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import store from './services/redux/Store';
 
 // global styles
-import './Styles/app.css';
+import './styles/app.css';
 
 // components
 import App from './App';
