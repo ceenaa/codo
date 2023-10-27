@@ -44,7 +44,7 @@ Developed with GO(Gin + Gorm) and TypeScript(React)
   http://localhost:8080/api/docs/index.html
 ```
 
-#### Screenshots
+## Screenshots
 ![]([http://url/to/img.png](https://github.com/ceenaa/codo/assets/106872263/bb914824-bd11-4a5a-ad68-bf4f2e3a1e8f)https://github.com/ceenaa/codo/assets/106872263/bb914824-bd11-4a5a-ad68-bf4f2e3a1e8f)
 ![]([http://url/to/img.png](https://github.com/ceenaa/codo/assets/106872263/b45f41bc-179c-4488-95a4-9ab6ec444f92)https://github.com/ceenaa/codo/assets/106872263/b45f41bc-179c-4488-95a4-9ab6ec444f92)
 ![]([http://url/to/img.png](https://github.com/ceenaa/codo/assets/106872263/d627bd52-0e36-46f3-a6bf-a5c18f3dfc21)https://github.com/ceenaa/codo/assets/106872263/d627bd52-0e36-46f3-a6bf-a5c18f3dfc21)
