@@ -20,6 +20,7 @@ func init() {
 // @host localhost:8080
 // @BasePath /api/
 func main() {
+
 	r := gin.Default()
 	r.Use(middleware.CORSMiddleware())
 	apiGroup := r.Group("/api")

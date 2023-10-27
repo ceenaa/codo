@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"backend/initializers"
 	"backend/models"
+	"backend/service"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,9 +18,11 @@ import (
 func ChartDetails(c *gin.Context) {
 	user := c.MustGet("user").(models.User)
 	var charts []models.ChartModel
-
-	// get charts between start date and end date
-	initializers.DB.Model(&models.ChartModel{}).Where("username = ?", user.Username).Order("Date asc").Find(&charts)
-
+	var err error
+	charts, err = service.ChartDetails(user.Username)
+	if err != nil {
+		c.JSON(400, gin.H{"message": "Error while getting chart details"})
+		return
+	}
 	c.JSON(200, gin.H{"charts": charts})
 }

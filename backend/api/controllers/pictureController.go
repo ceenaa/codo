@@ -5,6 +5,7 @@ import (
 	"backend/models"
 	"github.com/gin-gonic/gin"
 	"os"
+	"strings"
 )
 
 // @Summary Upload picture
@@ -24,7 +25,8 @@ func UploadPicture(c *gin.Context) {
 	}
 
 	user := c.MustGet("user").(models.User)
-	path := "../../frontend/public/media" + user.Username
+	fileFormat := strings.Split(file.Filename, ".")[1]
+	path := "../../frontend/public/media" + user.Username + "." + fileFormat
 
 	if os.IsExist(err) {
 		err := os.Remove(path)
