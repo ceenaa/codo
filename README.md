@@ -44,3 +44,11 @@ Developed with GO(Gin + Gorm) and TypeScript(React)
   http://localhost:8080/api/docs/index.html
 ```
 
+## Screenshots
+![](https://github.com/ceenaa/codo/blob/main/media/1.png)
+![](https://github.com/ceenaa/codo/blob/main/media/2.png)
+![](https://github.com/ceenaa/codo/blob/main/media/3.png)
+![](https://github.com/ceenaa/codo/blob/main/media/4.png)
+![](https://github.com/ceenaa/codo/blob/main/media/5.png)
+![](https://github.com/ceenaa/codo/blob/main/media/6.png)
+![](https://github.com/ceenaa/codo/blob/main/media/7.png)
