@@ -8,9 +8,12 @@ import (
 )
 
 func UpdateUserRatings(user models.User, rate int) error {
-	var total = user.AverageRate * float64(user.TotalRaters)
+	TotalRaters := user.TotalRaters
+	if TotalRaters == 0 {
+		TotalRaters = 1
+	}
+	var total = user.AverageRate * float64(TotalRaters)
 	total += float64(rate)
-	user.TotalRaters++
 	user.AverageRate = total / float64(user.TotalRaters)
 	err := repositories.UpdateUser(&user)
 	if err != nil {

@@ -22,11 +22,14 @@ func SignUp(body views.CreateUserRequest) error {
 
 	// Create the user
 	user := models.User{
-		Username:  body.Username,
-		FirstName: body.Firstname,
-		LastName:  body.Lastname,
-		Role:      body.Role,
-		Password:  string(hash),
+		Username:    body.Username,
+		FirstName:   body.Firstname,
+		LastName:    body.Lastname,
+		Role:        body.Role,
+		Password:    string(hash),
+		AverageRate: 3.0,
+		TotalRaters: 0,
+		PicturePath: "media/pic/default.png",
 	}
 	err = repositories.CreateUser(&user)
 	if err != nil {

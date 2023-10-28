@@ -1,27 +1,26 @@
 package service
 
 import (
+	"backend/initializers"
 	"backend/models"
 	"backend/repositories"
-	"fmt"
 	"time"
 )
 
 func UpdateChartTable() {
-	duration := 2 * time.Second
+	duration := 24 * time.Hour
 	currentTime := time.Now()
 	targetTime := currentTime.Add(duration)
 
-	//var users []models.User
-	//initializers.DB.Model(&models.User{}).Find(&users)
-	//for _, user := range users {
-	//	var chart models.ChartModel
-	//	chart.Date = time.Now()
-	//	chart.Username = user.Username
-	//	chart.AverageRate = user.AverageRate
-	//	initializers.DB.Save(&chart)
-	//}
-	fmt.Println("ASSF")
+	var users []models.User
+	initializers.DB.Model(&models.User{}).Find(&users)
+	for _, user := range users {
+		var chart models.ChartModel
+		chart.Date = time.Date(currentTime.Year(), currentTime.Month(), currentTime.Day(), 0, 0, 0, 0, time.UTC)
+		chart.Username = user.Username
+		chart.AverageRate = user.AverageRate
+		initializers.DB.Create(&chart)
+	}
 	time.Sleep(targetTime.Sub(currentTime))
 	UpdateChartTable()
 }

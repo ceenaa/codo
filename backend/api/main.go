@@ -4,6 +4,7 @@ import (
 	"backend/initializers"
 	middleware "backend/middlewares"
 	"backend/routes"
+	"backend/service"
 	"github.com/gin-gonic/gin"
 )
 
@@ -29,6 +30,8 @@ func main() {
 	routes.InitializeRatingRoutes(apiGroup)
 	routes.InitializePictureRoutes(apiGroup)
 	routes.InitializeChartRoutes(apiGroup)
+
+	go service.UpdateChartTable()
 
 	// media
 	r.StaticFS("/media", gin.Dir("../../media", false))
