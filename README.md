@@ -52,3 +52,10 @@ Developed with GO(Gin + Gorm) and TypeScript(React)
 ![](https://github.com/ceenaa/codo/blob/main/media/5.png)
 ![](https://github.com/ceenaa/codo/blob/main/media/6.png)
 ![](https://github.com/ceenaa/codo/blob/main/media/7.png)
+
+# Contributers
+<a href="https://github.com/ceenaa/codo/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ceenaa/codo" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
